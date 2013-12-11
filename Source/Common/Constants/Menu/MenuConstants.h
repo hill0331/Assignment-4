@@ -18,6 +18,6 @@ extern const char* MAIN_MENU_SCREEN_NAME;
 extern const char* LOAD_MENU_SCREEN_NAME;
 extern const char* SETTINGS_MENU_SCREEN_NAME;
 extern const char* SAVE_MENU_SCREEN_NAME;
-extern const char* CREDITS_SCREEN_NAME;
+extern const char* HIGH_SCORES_SCREEN_NAME;
 
 #endif 

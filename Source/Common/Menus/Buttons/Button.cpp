@@ -10,11 +10,11 @@ Button::Button(float x, float y, float width, float height, int state, char* tex
 
 	//Setup textures
 	std::string strTexture = std::string(texture);
-	std::string enabledTexture = strTexture + "-Enabled";
-	std::string disabledTexture = strTexture + "-Disabled";
-	std::string inFocusTexture = strTexture + "-InFocus";
-	std::string pressedTexture = strTexture + "-Pressed";
-	std::string triggeredTexture = strTexture + "-Triggered";
+	std::string enabledTexture = strTexture + "0";
+	std::string disabledTexture = strTexture + "1";
+	std::string inFocusTexture = strTexture + "2";
+	std::string pressedTexture = strTexture + "3";
+	std::string triggeredTexture = strTexture + "4";
 
 	setX(x);
 	setY(y);

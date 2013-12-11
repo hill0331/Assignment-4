@@ -1,7 +1,7 @@
 #include "MenuConstants.h"
 
 const float UI_SIDE_MENU_SPEED = 750.0f;
-extern const float MENU_TRANSITION_TIME = 0.5f;
+extern const float MENU_TRANSITION_TIME = 2.0f;
 
 //Buttons
 extern const char* BUTTON_TYPE = "Button";
@@ -16,4 +16,4 @@ const char* MAIN_MENU_SCREEN_NAME = "MainMenu";
 const char* SETTINGS_MENU_SCREEN_NAME = "SettingsMenu";
 const char* SAVE_MENU_SCREEN_NAME = "SaveMenu";
 const char* LOAD_MENU_SCREEN_NAME = "LoadMenu";
-const char* CREDITS_SCREEN_NAME = "CreditsScreen";
+const char* HIGH_SCORES_SCREEN_NAME = "HighScoresScreen";

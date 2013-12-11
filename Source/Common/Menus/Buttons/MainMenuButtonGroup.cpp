@@ -20,21 +20,21 @@ MainMenuButtonGroup::MainMenuButtonGroup()
 	float buttonInitialY = (float)ScreenManager::getInstance()->getScreenHeight() * 0.8;
 
 
-	Button *singlePlayerButton = new Button(buttonX, buttonInitialY - (buttonHeight * 3), 350.0f, 100.0f, ENABLED_BUTTON,
+	Button *playButton = new Button(buttonX, buttonInitialY - (buttonHeight * 3), 350.0f, 100.0f, ENABLED_BUTTON,
 		"/UI/Menus/MainMenu/buttons/SinglePlayer");
 
-	Button *multiPlayerButton = new Button(buttonX, buttonInitialY - (buttonHeight * 2), 350.0f, 100.0f, ENABLED_BUTTON,
+	Button *highScoresButton = new Button(buttonX, buttonInitialY - (buttonHeight * 2), 350.0f, 100.0f, ENABLED_BUTTON,
 		"/UI/Menus/MainMenu/buttons/MultiPlayer");
 
-	Button *creditsButton = new Button(buttonX, buttonInitialY - (buttonHeight), 350.0f, 100.0f, ENABLED_BUTTON,
+	Button *settingsButton = new Button(buttonX, buttonInitialY - (buttonHeight), 350.0f, 100.0f, ENABLED_BUTTON,
 		"/UI/Menus/MainMenu/buttons/Credits");
 
 	Button *exitButton = new Button(buttonX, buttonInitialY, 350.0f, 100.0f, ENABLED_BUTTON,
 		"UI/Menus/MainMenu/buttons/Exit");
 
-	addButton(singlePlayerButton);
-	addButton(multiPlayerButton);
-	addButton(creditsButton);
+	addButton(playButton);
+	addButton(highScoresButton);
+	addButton(settingsButton);
 	addButton(exitButton);
 }
 

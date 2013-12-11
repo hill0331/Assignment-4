@@ -159,18 +159,19 @@ void MainMenu::buttonPressed(int buttonNumber)
 {
 	if (buttonNumber == 0) 
 	{
-		m_ScreenToTransition = SETTINGS_MENU_SCREEN_NAME;
+		m_ScreenToTransition = LOAD_MENU_SCREEN_NAME;
 		m_TransitionOut = true;		
 	}
 
 	if (buttonNumber == 1) 
 	{
-		
+		m_ScreenToTransition = HIGH_SCORES_SCREEN_NAME;
+		m_TransitionOut = true;
 	}
 
 	if (buttonNumber == 2) 
 	{
-		m_ScreenToTransition = CREDITS_SCREEN_NAME;
+		m_ScreenToTransition = SETTINGS_MENU_SCREEN_NAME;
 		m_TransitionOut = true;
 	}
 
