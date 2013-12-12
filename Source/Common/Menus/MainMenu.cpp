@@ -17,20 +17,31 @@
 
 MainMenu::MainMenu()
 {
-	m_BkgTexture = new OpenGLTexture(MAIN_MENU_BKG_TEXTURE);
+	m_BkgTextureCount = 2;
 
-	m_Buttons = new MainMenuButtonGroup();	
+	m_BkgTextureList = new OpenGLTexture *[m_BkgTextureCount];
+
+	m_BkgTextureList[0] = new OpenGLTexture(MAIN_MENU_BKG_TEXTURE_0);
+	m_BkgTextureList[1] = new OpenGLTexture(MAIN_MENU_BKG_TEXTURE_1);
+
+	m_OverlayTexture = new OpenGLTexture(GAME_MAP_OVERLAY_TEXTURE);
+
+	m_Buttons = new MainMenuButtonGroup();
 	m_CurrentAlpha = 1;
 	m_TransitionOut = false;
 	m_ScreenToTransition = "";
+
+	m_BkgTexturePosition = 0.0f;
+	m_CurrentBkgTexture = 0;
+	m_BkgAlpha = 0;
 }
 
 MainMenu::~MainMenu()
 {
-	if (m_BkgTexture != NULL)
+	if (m_OverlayTexture != NULL)
 	{
-		delete m_BkgTexture;
-		m_BkgTexture = NULL;
+		delete m_OverlayTexture;
+		m_OverlayTexture = NULL;
 	}
 
 	if (m_Buttons != NULL)
@@ -44,6 +55,36 @@ void MainMenu::update(double delta)
 {
 
 	m_Buttons->update(delta);
+	//Alpha transition for background textures
+	if (abs(m_BkgTexturePosition) <= m_BkgTextureList[m_CurrentBkgTexture]->getSourceWidth() * 0.05)
+	{
+		m_BkgAlpha = 1 - abs(m_BkgTexturePosition) / (m_BkgTextureList[m_CurrentBkgTexture]->getSourceWidth() * 0.05);
+	}
+	else if (abs(m_BkgTexturePosition) >= (m_BkgTextureList[m_CurrentBkgTexture]->getSourceWidth() - ScreenManager::getInstance()->getScreenWidth()) * 0.85)
+	{
+		float x = abs(m_BkgTexturePosition) / (m_BkgTextureList[m_CurrentBkgTexture]->getSourceWidth() - ScreenManager::getInstance()->getScreenWidth());
+		m_BkgAlpha = (x - 0.85) / 0.15;
+
+	}
+
+	//Switch background textures
+	if (abs(m_BkgTexturePosition) > m_BkgTextureList[m_CurrentBkgTexture]->getSourceWidth() - ScreenManager::getInstance()->getScreenWidth())
+	{
+		if (m_CurrentBkgTexture < m_BkgTextureCount - 1)
+		{
+			m_CurrentBkgTexture++;
+			m_BkgTexturePosition = 0.0f;
+		}
+		else
+		{
+			m_CurrentBkgTexture = 0;
+			m_BkgTexturePosition = 0.0f;
+		}
+	}
+	else
+	{
+		m_BkgTexturePosition -= 1;
+	}
 
 	if (m_TransitionOut == false && m_CurrentAlpha > 0)
 	{
@@ -65,7 +106,15 @@ void MainMenu::update(double delta)
 
 void MainMenu::paint()
 {
-	OpenGLRenderer::getInstance()->drawTexture(m_BkgTexture, 0.0f, 0.0f);
+	OpenGLRenderer::getInstance()->drawTexture(m_BkgTextureList[m_CurrentBkgTexture], m_BkgTexturePosition, 0.0f);
+
+	OpenGLRenderer::getInstance()->drawTexture(m_OverlayTexture, 0.0f, 0.0f);
+
+	//Fade Effect bkg
+	OpenGLColor fillColor0 = OpenGLColor(0, 0, 0, m_BkgAlpha);
+	OpenGLRenderer::getInstance()->setForegroundColor(fillColor0);
+	OpenGLRenderer::getInstance()->drawRectangle(0.0f, 0.0f, getWidth(), getHeight(), true);
+
 	m_Buttons->paint();
 
 	//Fade Effect
@@ -84,7 +133,7 @@ void MainMenu::screenWillAppear()
 {
 	m_CurrentAlpha = 1;
 	m_TransitionOut = false;
-	m_ScreenToTransition = "";	
+	m_ScreenToTransition = "";
 }
 
 void MainMenu::mouseMovementEvent(float deltaX, float deltaY, float positionX, float positionY)
@@ -157,19 +206,19 @@ void MainMenu::transitionOut(const char* screenName)
 
 void MainMenu::buttonPressed(int buttonNumber)
 {
-	if (buttonNumber == 0) 
+	if (buttonNumber == 0)
 	{
 		m_ScreenToTransition = LOAD_MENU_SCREEN_NAME;
-		m_TransitionOut = true;		
+		m_TransitionOut = true;
 	}
 
-	if (buttonNumber == 1) 
+	if (buttonNumber == 1)
 	{
 		m_ScreenToTransition = HIGH_SCORES_SCREEN_NAME;
 		m_TransitionOut = true;
 	}
 
-	if (buttonNumber == 2) 
+	if (buttonNumber == 2)
 	{
 		m_ScreenToTransition = SETTINGS_MENU_SCREEN_NAME;
 		m_TransitionOut = true;

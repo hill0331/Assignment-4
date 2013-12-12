@@ -343,6 +343,12 @@
     <ClCompile Include="..\..\Common\Menus\SplashScreen.cpp">
       <Filter>Source Files\Menus</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Common\Menus\FileMenu.cpp">
+      <Filter>Source Files\Menus</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Common\Menus\Buttons\FileMenuButtonGroup.cpp">
+      <Filter>Source Files\Menus\Buttons</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="OpenGLWindow.h">
@@ -602,6 +608,12 @@
     </ClInclude>
     <ClInclude Include="..\..\Common\Menus\SplashScreen.h">
       <Filter>Source Files\Menus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Common\Menus\FileMenu.h">
+      <Filter>Source Files\Menus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Common\Menus\Buttons\FileMenuButtonGroup.h">
+      <Filter>Source Files\Menus\Buttons</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

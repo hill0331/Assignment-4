@@ -16,69 +16,67 @@
 
 SplashScreen::SplashScreen()
 {
-	m_BkgTexture = new OpenGLTexture(SPLASH_SCREEN_BKG_TEXTURE);
-	m_SpacePromptTexture = new OpenGLTexture(SPLASH_SCREEN_SPACE_PROMPT_TEXTURE);
+	m_LogoTexture = new OpenGLTexture(SPLASH_SCREEN_LOGO_TEXTURE);
 
 	m_CurrentAlpha = 1;
 	m_CurrentAlpha2 = 0;
 	m_Transition = false;
 
-	m_SpacePromptTexture->setAlpha(m_CurrentAlpha2);
+	OpenGLRenderer::getInstance()->setBackgroundColor(OpenGLColorBlack());
 }
 
 SplashScreen::~SplashScreen()
 {
-	if (m_BkgTexture != NULL)
+	if (m_LogoTexture != NULL)
 	{
-		delete m_BkgTexture;
-		m_BkgTexture = NULL;
+		delete m_LogoTexture;
+		m_LogoTexture = NULL;
 	}
-
-	if (m_SpacePromptTexture != NULL)
-	{
-		delete m_SpacePromptTexture;
-		m_SpacePromptTexture = NULL;
-	}
+	
 }
 
 void SplashScreen::update(double delta)
 {
-	if (m_CurrentAlpha > 0)
-	{
-		m_CurrentAlpha -= 0.4f * delta;
-	}
-	else if (m_CurrentAlpha2 < 1)
-	{
-		m_CurrentAlpha2 += 0.4f * delta;
+	static float timeElpased; 	
 
-		m_SpacePromptTexture->setAlpha(m_CurrentAlpha2);
+	if (timeElpased > 2.0f && timeElpased < 4.0f)
+	{
+		if (m_CurrentAlpha > 0)
+		{
+			m_CurrentAlpha -= 0.5f * delta;
+		}
+		
+	}
+
+	if (timeElpased > 6.0f)
+	{
+		m_Transition = true;
 	}
 
 	if (m_Transition == true)
 	{
 		if (m_CurrentAlpha < 1)
 		{
-			m_CurrentAlpha += MENU_TRANSITION_TIME * delta;
+			m_CurrentAlpha += 0.01f;
 		}
 		else
 		{
 			ScreenManager::getInstance()->switchScreen(MAIN_MENU_SCREEN_NAME);
 		}
 	}
+
+	timeElpased += delta;
 }
 
 void SplashScreen::paint()
 {
 
-	OpenGLRenderer::getInstance()->drawTexture(m_BkgTexture, 0.0f, 0.0f);
-	OpenGLRenderer::getInstance()->drawTexture(m_SpacePromptTexture,
-		((ScreenManager::getInstance()->getScreenWidth() - m_SpacePromptTexture->getSourceWidth()) / 2),
-		ScreenManager::getInstance()->getScreenHeight() * 0.9f);
+	OpenGLRenderer::getInstance()->drawTexture(m_LogoTexture, 100.0f, 300.0f);
 
 	//Fade Effect
 	OpenGLColor fillColor = OpenGLColor(0, 0, 0, m_CurrentAlpha);
 	OpenGLRenderer::getInstance()->setForegroundColor(fillColor);
-	OpenGLRenderer::getInstance()->drawRectangle(0.0f, 0.0f, getWidth(), getHeight(), true);
+	OpenGLRenderer::getInstance()->drawRectangle(0.0f, 0.0f, getWidth(), getHeight(), true);	
 
 }
 
@@ -97,20 +95,11 @@ void SplashScreen::screenWillAppear()
 //Key Events
 void SplashScreen::keyUpEvent(int keyCode)
 {
-	if (keyCode == VK_SPACE)
-	{
-		if (m_CurrentAlpha2 > 0.3)
-		{
-			m_Transition = true;
-		}
-	}
+	
 }
 
 //Mouse Events
 void SplashScreen::mouseLeftClickUpEvent(float positionX, float positionY)
 {
-	if (m_CurrentAlpha2 > 0.3)
-	{
-		m_Transition = true;
-	}
+	
 }

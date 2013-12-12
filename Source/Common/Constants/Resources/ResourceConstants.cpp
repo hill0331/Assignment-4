@@ -18,10 +18,13 @@ const char* RES_TILE_ROCK = "TileRock";
 const char* RES_TILE_TREE = "TileTree";
 const char* RES_TILE_WATER = "TileWater";
 
+//Game overlay
+const char* GAME_MAP_OVERLAY_TEXTURE = "UI/Game/Overlay";
+
 //Menu Resources
 //Splash Screen
-const char* SPLASH_SCREEN_BKG_TEXTURE = "";
-const char* SPLASH_SCREEN_SPACE_PROMPT_TEXTURE = "";
+const char* SPLASH_SCREEN_LOGO_TEXTURE = "UI/Menus/SplashScreen/FullLogo";
 
 //Main Menu
-const char* MAIN_MENU_BKG_TEXTURE = "";
+const char* MAIN_MENU_BKG_TEXTURE_0 = "UI/Menus/MainMenu/MenuBkg1";
+const char* MAIN_MENU_BKG_TEXTURE_1 = "UI/Menus/MainMenu/MenuBkg2";

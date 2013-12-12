@@ -39,8 +39,7 @@ private:
 	void mouseLeftClickUpEvent(float positionX, float positionY);
 
 	//Textures
-	OpenGLTexture * m_BkgTexture;
-	OpenGLTexture * m_SpacePromptTexture;
+	OpenGLTexture * m_LogoTexture;	
 
 	float m_CurrentAlpha;
 	float m_CurrentAlpha2;

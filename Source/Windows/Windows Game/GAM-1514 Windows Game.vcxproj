@@ -154,7 +154,9 @@
     <ClCompile Include="..\..\Common\Libraries\zlib\zutil.c" />
     <ClCompile Include="..\..\Common\Menus\Buttons\ButtonGroup.cpp" />
     <ClCompile Include="..\..\Common\Menus\Buttons\Button.cpp" />
+    <ClCompile Include="..\..\Common\Menus\Buttons\FileMenuButtonGroup.cpp" />
     <ClCompile Include="..\..\Common\Menus\Buttons\MainMenuButtonGroup.cpp" />
+    <ClCompile Include="..\..\Common\Menus\FileMenu.cpp" />
     <ClCompile Include="..\..\Common\Menus\LoadLevelMenu.cpp" />
     <ClCompile Include="..\..\Common\Menus\MainMenu.cpp" />
     <ClCompile Include="..\..\Common\Menus\Menu.cpp" />
@@ -238,7 +240,9 @@
     <ClInclude Include="..\..\Common\Libraries\zlib\zutil.h" />
     <ClInclude Include="..\..\Common\Menus\Buttons\ButtonGroup.h" />
     <ClInclude Include="..\..\Common\Menus\Buttons\Button.h" />
+    <ClInclude Include="..\..\Common\Menus\Buttons\FileMenuButtonGroup.h" />
     <ClInclude Include="..\..\Common\Menus\Buttons\MainMenuButtonGroup.h" />
+    <ClInclude Include="..\..\Common\Menus\FileMenu.h" />
     <ClInclude Include="..\..\Common\Menus\LoadLevelMenu.h" />
     <ClInclude Include="..\..\Common\Menus\MainMenu.h" />
     <ClInclude Include="..\..\Common\Menus\Menu.h" />

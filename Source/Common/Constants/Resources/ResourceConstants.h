@@ -18,13 +18,17 @@ extern const char* RES_TILE_ROCK;
 extern const char* RES_TILE_TREE;
 extern const char* RES_TILE_WATER;
 
+//Game overlay
+extern const char* GAME_MAP_OVERLAY_TEXTURE;
+
 //Menu Resources
 //Splash Screen
-extern const char* SPLASH_SCREEN_BKG_TEXTURE;
-extern const char* SPLASH_SCREEN_SPACE_PROMPT_TEXTURE;
+extern const char* SPLASH_SCREEN_LOGO_TEXTURE;
 
 //Main Menu
-extern const char* MAIN_MENU_BKG_TEXTURE;
+extern const char* MAIN_MENU_BKG_TEXTURE_0;
+extern const char* MAIN_MENU_BKG_TEXTURE_1;
+
 extern const char* MAIN_MENU_PLAY_BUTTON_TEXTURE;
 
 #endif 

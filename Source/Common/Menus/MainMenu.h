@@ -48,7 +48,13 @@ private:
 	virtual void keyUpEvent(int keyCode);
 
 	//Textures
-	OpenGLTexture * m_BkgTexture;
+	OpenGLTexture * m_OverlayTexture;
+	OpenGLTexture ** m_BkgTextureList;
+	int m_CurrentBkgTexture;
+	int m_BkgTextureCount;
+
+	float m_BkgTexturePosition;
+	float m_BkgAlpha;
 
 	//Buttons
 	ButtonGroup * m_Buttons;	
