@@ -20,7 +20,7 @@
 
 EnemyUnit::EnemyUnit(Level* aLevel):Unit(aLevel)
 {
-	setScore(10);
+	setScore(10);	
 }
 
 EnemyUnit::~EnemyUnit()
