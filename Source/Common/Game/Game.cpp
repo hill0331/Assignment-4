@@ -30,6 +30,7 @@ m_ElapsedGameTime(0)
 	//UI
 	m_FastForward2X = new OpenGLTexture(FAST_FOARWARD_2X_TEXTURE);
 	m_FastForward5X = new OpenGLTexture(FAST_FOARWARD_5X_TEXTURE);
+	m_HUDBorderTex = new OpenGLTexture(HUD_BORDER_TEXTURE);
 
 	m_Font = new UIFont("fonts/TechFont");	
 
@@ -63,6 +64,11 @@ Game::~Game()
 		delete m_FastForward5X;
 		m_FastForward5X = NULL;
 	}
+	if (m_HUDBorderTex != NULL)
+	{
+		delete m_HUDBorderTex;
+		m_HUDBorderTex = NULL;
+	}
 }
 void Game::screenWillAppear()
 {
@@ -74,15 +80,7 @@ void Game::screenWillAppear()
 
 void Game::update(double delta)
 {
-	m_ElapsedGameTime += delta;
-
-	std::ostringstream oss;
-	oss << (int)m_ElapsedGameTime;
-
-	std::string time = "TIME   ";
-	time.append(oss.str());
-	
-	m_Font->setText(time.c_str());
+	m_ElapsedGameTime += delta;	
 
 	if (m_Level != NULL)
 	{
@@ -114,7 +112,42 @@ void Game::paint()
 		OpenGLRenderer::getInstance()->drawTexture(m_FastForward5X, 5.0f, 5.0f);
 	}
 
-	m_Font->draw(getWidth() * 0.47, 5.0f);
+	//Text border
+	OpenGLRenderer::getInstance()->drawTexture(m_HUDBorderTex, (getWidth() - m_HUDBorderTex->getTextureWidth()) /2, 0.0f);
+
+	//Text based UI
+	if (m_Font != NULL)
+	{
+		//Time
+		std::ostringstream oss;
+		oss << (int)m_ElapsedGameTime;
+
+		std::string time = "TIME   ";
+		time.append(oss.str());
+
+		m_Font->setText(time.c_str());
+		m_Font->draw(getWidth() * 0.45, 5.0f);
+
+		//Lives	
+		oss.str(std::string());
+		oss << m_Level->getNumberOfLives();
+		 
+		std::string lives = "LIVES   ";
+		lives.append(oss.str());
+		
+		m_Font->setText(lives.c_str());
+		m_Font->draw(getWidth() * 0.29, 5.0f);
+
+		//Score
+		oss.str(std::string());
+		//oss << m_Level->getPlayerScore();
+
+		std::string score = "SCORE   ";
+		score.append(oss.str());
+
+		m_Font->setText(score.c_str());
+		m_Font->draw(getWidth() * 0.58, 5.0f);
+	}
 
 	if (m_TowersMenu != NULL)
 	{

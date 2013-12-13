@@ -56,6 +56,7 @@ private:
 	void cycleFastForward();
 	OpenGLTexture * m_FastForward2X;
 	OpenGLTexture * m_FastForward5X;
+	OpenGLTexture * m_HUDBorderTex;
 	UIFont * m_Font;
 
 	float m_ElapsedGameTime;

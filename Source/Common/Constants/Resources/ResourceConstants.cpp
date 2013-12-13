@@ -36,6 +36,7 @@ const char* RES_TILE_WALL_EDGE_FILLER = "tiles/wall/WallTileEdge-Filler";
 const char* GAME_MAP_OVERLAY_TEXTURE = "UI/Game/Overlay";
 const char* FAST_FOARWARD_2X_TEXTURE = "UI/Game/FastForward2X";
 const char* FAST_FOARWARD_5X_TEXTURE = "UI/Game/FastForward5X";
+const char* HUD_BORDER_TEXTURE = "UI/Game/HUDBorder";
 
 
 //Level Backgrounds

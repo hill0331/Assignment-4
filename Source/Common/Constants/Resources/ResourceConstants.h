@@ -36,6 +36,7 @@ extern const char* RES_TILE_WALL_EDGE_FILLER;
 extern const char* GAME_MAP_OVERLAY_TEXTURE;
 extern const char* FAST_FOARWARD_2X_TEXTURE;
 extern const char* FAST_FOARWARD_5X_TEXTURE;
+extern const char* HUD_BORDER_TEXTURE;
 
 //Level Backgrounds
 extern const char* RES_BACKGROUND_LEVEL1;
