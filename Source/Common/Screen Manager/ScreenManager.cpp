@@ -13,6 +13,7 @@
 #include "../Menus/MainMenu.h"
 #include "../Menus/SplashScreen.h"
 #include "../Menus/FileMenu.h"
+#include "../Menus/GameOverScreen.h"
 #include "../Level Editor/LevelEditor.h"
 #include <time.h>
 
@@ -66,6 +67,7 @@ void ScreenManager::loadScreens()
 	//addScreen(new SplashScreen());
     addScreen(new MainMenu());	
 	addScreen(new FileMenu());
+	addScreen(new GameOverScreen());
 }
 
 void ScreenManager::setScreenSize(float aWidth, float aHeight)

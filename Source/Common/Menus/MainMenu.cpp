@@ -44,6 +44,15 @@ MainMenu::~MainMenu()
 		m_OverlayTexture = NULL;
 	}
 
+	for (int i = 0; i < m_BkgTextureCount; i++)
+	{
+		if (m_BkgTextureList[i] != NULL)
+		{
+			delete m_BkgTextureList[i];
+			m_BkgTextureList[i] = NULL;
+		}
+	}
+
 	if (m_Buttons != NULL)
 	{
 		delete m_Buttons;
@@ -83,7 +92,8 @@ void MainMenu::update(double delta)
 	}
 	else
 	{
-		m_BkgTexturePosition -= 1;
+		//Scroll Background
+		m_BkgTexturePosition -= (BACKGROUND_SCROLL_SPEED * delta);
 	}
 
 	if (m_TransitionOut == false && m_CurrentAlpha > 0)

@@ -32,8 +32,10 @@ extern const char* RES_TILE_WALL_EDGE_STRAIGHT;
 extern const char* RES_TILE_WALL_EDGE_CORNER_90;
 extern const char* RES_TILE_WALL_EDGE_FILLER;
 
-//Game overlay
+//Game 
 extern const char* GAME_MAP_OVERLAY_TEXTURE;
+extern const char* FAST_FOARWARD_2X_TEXTURE;
+extern const char* FAST_FOARWARD_5X_TEXTURE;
 
 //Level Backgrounds
 extern const char* RES_BACKGROUND_LEVEL1;
@@ -49,6 +51,6 @@ extern const char* SPLASH_SCREEN_LOGO_TEXTURE;
 extern const char* MAIN_MENU_BKG_TEXTURE_0;
 extern const char* MAIN_MENU_BKG_TEXTURE_1;
 
-extern const char* MAIN_MENU_PLAY_BUTTON_TEXTURE;
+extern const char* GAME_OVER_SCREEN_TITLE_TEXTURE;
 
 #endif 

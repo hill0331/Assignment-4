@@ -38,60 +38,23 @@ void EnemyUnit::paint()
 	OpenGLRenderer::getInstance()->drawCircle(getX() + (getWidth() / 2), getY() + (getHeight() / 2), getWidth() / 2,true,12);
 	OpenGLRenderer::getInstance()->setForegroundColor(PLAYER_OUTLINE_COLOR);
 	OpenGLRenderer::getInstance()->drawCircle(getX() + (getWidth() / 2), getY() + (getHeight() / 2), getWidth() / 2, false,12);
-	// eyes
-	OpenGLRenderer::getInstance()->setForegroundColor(OpenGLColorWhite());
-	OpenGLRenderer::getInstance()->drawCircle(getX() + (getWidth() / 2)-10, getY() + (getHeight() / 2)-5, 4, true,12);
-	OpenGLRenderer::getInstance()->drawCircle(getX() + (getWidth() / 2)+10, getY() + (getHeight() / 2)-5, 4, true,12);
-	Tile *player = m_Level->getPlayerTile();
-	float eyeX;
-	float eyeY;
-	float px,py;
-	float ex = getX();
-	float ey = getY();
-	player->getPosition(px,py);
-
-	int dx = (int)(px-ex);
-	int dy = (int)(py-ey);
-	if (dx == 0)
-	{
-		eyeX = 0;
-	}
-	else if (dx < 0)
-	{
-		eyeX = -2;
-	}
-	else // dx > 0
-	{
-		eyeX = +2;
-	}
-	if (dy == 0)
-	{
-		eyeY = 0;
-	}
-	else if (dy < 0)
-	{
-		eyeY = -2;
-	}
-	else
-	{
-		eyeY = +2;
-	}
 	
-	OpenGLRenderer::getInstance()->setForegroundColor(OpenGLColorBlack());
-	OpenGLRenderer::getInstance()->drawCircle(getX() + (getWidth() / 2)-10+eyeX, getY() +eyeY+ (getHeight() / 2)-5, 1, true,12);
-	OpenGLRenderer::getInstance()->drawCircle(getX() + (getWidth() / 2)+10+eyeX, getY() +eyeY+ (getHeight() / 2)-5, 1, true,12);
 }
 
 void EnemyUnit::reachedDestination()
 {
-	if (m_CurrentTile == m_Level->getPlayerTile()) {
-		// we're done!
-		// GAME OVER MAN...
-		ScreenManager::getInstance()->switchScreen(MAIN_MENU_SCREEN_NAME);
-
+	if (m_CurrentTile == m_Level->getTargetTile()) 
+	{
+		m_Level->decrementLives(1);
+		setIsActive(false);
 	}
-	setScore(10);
-	m_DestinationTile = m_Level->getPlayerTile();
-	m_Level->queueForPathFinding(this);
+	else
+	{
+
+		setScore(10);
+		m_DestinationTile = m_Level->getTargetTile();
+		m_Level->queueForPathFinding(this);
+	}
+	
 
 }

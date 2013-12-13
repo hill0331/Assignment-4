@@ -1,19 +1,19 @@
 //
 //	Student:		Bradley Hill
-//	Creation date:	October 15th 2013
+//	Creation date:	December 12th 2013
 //	Course number:	GAM1514
 //	Professor:		Dan Lingman
-//	Purpose:		Code for the Game Over screen
-//	Modified:		October 30th 2013
+//	Purpose:		Game Over Screen Code
+//	Modified:		December 12th 2013
 //
 
 #ifndef GAME_OVER_SCREEN_H
 #define GAME_OVER_SCREEN_H
 
-#include "../../Screen Manager/Screen.h"
+#include "Buttons/ButtonGroup.h"
+#include "../Screen Manager/Screen.h"
 
 class OpenGLTexture;
-class ButtonGroup;
 
 class GameOverScreen : public Screen
 {
@@ -32,10 +32,6 @@ public:
 	//Screen event method, inherited from the screen class
 	void screenWillAppear();
 
-	//Draw Number Function
-	void drawNumber(int number, float x, float y);
-	
-	//Fade efect
 	void transitionOut(const char* screenName);
 	void buttonPressed(int buttonNumber);
 
@@ -51,19 +47,20 @@ private:
 	virtual void keyDownEvent(int keyCode);
 	virtual void keyUpEvent(int keyCode);
 
-	//Score variables
-	short m_LeftGoalsScored;
-	short m_LeftSaves;
-	short m_RightGoalsScored;
-	short m_RightSaves;
-
 	//Textures
-	OpenGLTexture * m_BkgTexture;
-	OpenGLTexture * m_GameOverHeaderTexture;
-	OpenGLTexture** m_ScoreInfoNumbers;
+	OpenGLTexture * m_OverlayTexture;
+	OpenGLTexture ** m_BkgTextureList;
+	int m_CurrentBkgTexture;
+	int m_BkgTextureCount;
+
+	//UI
+	OpenGLTexture * m_TitleTex;
+
+	float m_BkgTexturePosition;
+	float m_BkgAlpha;
 
 	//Buttons
-	ButtonGroup * m_Buttons;
+	ButtonGroup * m_Buttons;	
 
 	//Fade effect
 	float m_CurrentAlpha;

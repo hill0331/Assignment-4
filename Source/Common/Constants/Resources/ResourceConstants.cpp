@@ -32,8 +32,11 @@ const char* RES_TILE_WALL_EDGE_STRAIGHT = "tiles/wall/WallTileEdge-Straight";
 const char* RES_TILE_WALL_EDGE_CORNER_90 = "tiles/wall/WallTileEdge-Corner-90";
 const char* RES_TILE_WALL_EDGE_FILLER = "tiles/wall/WallTileEdge-Filler";
 
-//Game overlay
+//Game 
 const char* GAME_MAP_OVERLAY_TEXTURE = "UI/Game/Overlay";
+const char* FAST_FOARWARD_2X_TEXTURE = "UI/Game/FastForward2X";
+const char* FAST_FOARWARD_5X_TEXTURE = "UI/Game/FastForward5X";
+
 
 //Level Backgrounds
 const char* RES_BACKGROUND_LEVEL1 = "backgrounds/Level-1";
@@ -48,3 +51,5 @@ const char* SPLASH_SCREEN_LOGO_TEXTURE = "UI/Menus/SplashScreen/FullLogo";
 //Main Menu
 const char* MAIN_MENU_BKG_TEXTURE_0 = "UI/Menus/MainMenu/MenuBkg1";
 const char* MAIN_MENU_BKG_TEXTURE_1 = "UI/Menus/MainMenu/MenuBkg2";
+
+const char* GAME_OVER_SCREEN_TITLE_TEXTURE = "UI/Menus/GameOver/GameOverTitle";

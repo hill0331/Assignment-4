@@ -54,9 +54,9 @@ FastPathFinder *Unit::getPathFinder()
 	return m_FastPathFinder;
 }
 
-void Unit::deleteRequested()
+void Unit::deleteRequested(bool deleteRequested)
 {
-
+	m_DeleteRequested = true;
 }
 void Unit::getCoordinatesFromTile(Tile* tile,int &x,int &y)
 {

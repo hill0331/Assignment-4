@@ -66,6 +66,8 @@ public:
     
 	unsigned int getTextureWidth();
 	unsigned int getTextureHeight();
+
+	void setSourceFrame(float x, float y, float width, float height);
     
     std::string getFilename();
     std::string getAtlasKey();

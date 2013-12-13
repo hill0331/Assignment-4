@@ -1626,8 +1626,8 @@
 		
 		{
 			"number" : 270,
-			"rotation" : 180.0,
-			"type" : 8
+			"rotation" : 0.0,
+			"type" : 13
 		},
 		
 		{
@@ -1872,8 +1872,8 @@
 		
 		{
 			"number" : 311,
-			"rotation" : 180.0,
-			"type" : 13
+			"rotation" : 0.0,
+			"type" : 6
 		},
 		
 		{
@@ -4398,7 +4398,7 @@
 		
 		{
 			"number" : 732,
-			"rotation" : 180.0,
+			"rotation" : 0.0,
 			"type" : 8
 		},
 		
@@ -6306,8 +6306,8 @@
 		
 		{
 			"number" : 1050,
-			"rotation" : 180.0,
-			"type" : 8
+			"rotation" : 0.0,
+			"type" : 13
 		},
 		
 		{
@@ -6864,8 +6864,8 @@
 		
 		{
 			"number" : 1143,
-			"rotation" : 180.0,
-			"type" : 13
+			"rotation" : 0.0,
+			"type" : 6
 		},
 		
 		{

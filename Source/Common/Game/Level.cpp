@@ -52,13 +52,16 @@ m_SelectedTileIndex(-1),
 m_PaintTileScoring(false),
 m_PaintTileIndexes(false),
 m_PaintBradPathScoring(false),
-m_LevelBkg(NULL)
+m_LevelBkg(NULL),
+m_TargetTile(NULL),
+m_Lives(3)
 {
 	//Create the player object
 	if (isEditingLevel == false || true)
 	{
-		m_Player = new Player(this);
+		//m_Player = new Player(this);
 	}	
+	
 }
 
 Level::~Level()
@@ -102,13 +105,17 @@ void Level::clear()
 		}
 	}
 }
-Tile *Level::getPlayerTile()
+Tile * Level::getTargetTile()
 {
-	return m_Player->getCurrentTile();
+	return m_TargetTile;
 }
 
 void Level::update(double aDelta)
 {
+	if (m_Lives <= 0)
+	{
+		gameOver();
+	}
 	//Update all the game tiles
 	for (int i = 0; i < (int)getNumberOfTiles(); i++)
 	{
@@ -131,19 +138,33 @@ void Level::update(double aDelta)
 		m_Player->update(aDelta);
 
 	}
+
+	//Update spawn Points
 	if (m_EnemySpawnPoints.size() != 0)
 	{
 		for (int i = 0; i < m_EnemySpawnPoints.size(); i++)
-		{
-			m_EnemySpawnPoints[i]->update(aDelta);
+		{			
+			m_EnemySpawnPoints.at(i)->update(aDelta);
 		}
 	}
 
 	for (int i = 0; i < m_Units.size(); i++)
 	{
-		Unit* unit = (Unit*)(m_Units.at(i));
-		unit->update(aDelta);
+		if (m_Units.at(i)->getIsActive() == false)
+		{
+			//m_Units.at(i)->deleteRequested(true);	
+			//m_Units.at(i)->update(aDelta);
+			Unit * unit = m_Units.at(i);
+			delete unit;
+			unit = NULL;
+			m_Units.erase(m_Units.begin() + i);
+		}
+		else
+		{
+			m_Units.at(i)->update(aDelta);
+		}
 	}
+
 }
 
 void Level::paint()
@@ -162,57 +183,22 @@ void Level::paint()
 			{
 				//Paint the tile
 				m_Tiles[i]->paint();
-			}
-
-			//If the paint tile indexes flag is set to true,
-			//draw the index number on the tiles
-			if (m_PaintTileIndexes == true)
-			{
-				m_Tiles[i]->paintIndex(i);
-			}
+			}			
 		}
 	}
 
 
 	//Paint the Player
 	if (m_Player != NULL)
-	{
-		//If paint tile scoring flag is set to true,
-		//draw the path scoring
-
-		if (m_PaintTileScoring == true)
-		{
-			for (int x = 0; x < (int)getNumberOfHorizontalTiles(); x++)
-			{
-				for (int y = 0; y < (int)getNumberOfVerticalTiles(); y++)
-				{
-					Node *node = m_Player->getPathFinder()->getNode(x, y);
-					if (node->getState() != RAW)
-					{
-						Tile *tile = getTileForCoordinates(x, y);
-						tile->paintScoreF(node->getFScore());
-					}
-				}
-			}
-			for (int index = 0; index < m_Player->getPathFinder()->getPathLength(); index++)
-			{
-				Node *n = m_Player->getPathFinder()->getPathElement(index);
-				OpenGLColor old = OpenGLRenderer::getInstance()->getForegroundColor();
-				OpenGLRenderer::getInstance()->setForegroundColor(OpenGLColorRed());
-				OpenGLRenderer::getInstance()->drawRectangle((float)(n->getX() * 32), (float)(n->getY() * 32), 32.0f, 32.0f, false);
-				OpenGLRenderer::getInstance()->setForegroundColor(old);
-
-			}
-			//TODO: Paint the tile scores
-
-		}
+	{		
 		//Paint the player
 		m_Player->paint();
 	}
+
+	//Paint enemy units
 	for (int i = 0; i < m_Units.size(); i++)
 	{
-		Unit* unit = (Unit*)(m_Units.at(i));
-		unit->paint();
+		m_Units.at(i)->paint();		
 	}	
 }
 
@@ -240,7 +226,7 @@ void Level::reset()
 		for (int i = 0; i < m_Units.size(); i++)
 		{
 			Unit* unit = (Unit*)(m_Units.at(i));
-			unit->deleteRequested();
+			unit->deleteRequested(true);
 		}
 		m_Units.clear();
 		//m_SpawnPoint->setCurrentTile(m_Tiles[0]);
@@ -272,18 +258,7 @@ void Level::mouseLeftClickUpEvent(float aPositionX, float aPositionY)
 
 void Level::keyUpEvent(int keyCode)
 {
-	if (keyCode == KEYCODE_R)
-	{
-		reset();
-	}
-	else if (keyCode == KEYCODE_S)
-	{
-		togglePaintTileScoring();
-	}
-	else if (keyCode == KEYCODE_I)
-	{
-		togglePaintTileIndexes();
-	}
+	
 }
 
 void Level::load(std::string levelName)
@@ -313,6 +288,7 @@ void Level::load(std::string levelName)
 		in.open(levelName);
 
 		bool success = reader.parse(in, root, false);
+		
 
 		if (success == true)
 		{
@@ -362,9 +338,18 @@ void Level::load(std::string levelName)
 
 					if (m_Tiles[tileIndex]->getTileType() == TileTypeEnemySpawn)
 					{
+						static int spawnTime = 2;
+
 						SpawnPoint * enemySpawn = new SpawnPoint(this);
+						enemySpawn->setSpawnRate(spawnTime);
 						enemySpawn->setCurrentTile(m_Tiles[tileIndex]);
+
 						m_EnemySpawnPoints.push_back(enemySpawn);
+						spawnTime += 1;						
+					}
+					else if (m_Tiles[tileIndex]->getTileType() == TileTypeTarget)
+					{
+						m_TargetTile = m_Tiles[tileIndex];
 					}
 
 					//Increment the tile index
@@ -382,40 +367,14 @@ void Level::load(std::string levelName)
 			//The level is loaded, reset everything
 			reset();
 		}
-		in.close();			
-	}
-	else
-	{
-		//Tile variables
-		int tileIndex = 0;
-		float tileX = 0.0f;
-		float tileY = 0.0f;
-
-		//Cycle through all the tiles and create them
-		for (int v = 0; v < (int)getNumberOfVerticalTiles(); v++)
+		else
 		{
-			for (int h = 0; h < (int)getNumberOfHorizontalTiles(); h++)
-			{
-				//The empty level will contain only ground tiles
-				m_Tiles[tileIndex] = new EmptyTile(0.0f);
-				m_Tiles[tileIndex]->setPosition(tileX, tileY);
-				m_Tiles[tileIndex]->setSize((float)m_TileSize, (float)m_TileSize);
-
-				//Increment the tile index
-				tileIndex++;
-
-				//And increment the tile x position
-				tileX += m_TileSize;
-			}
-
-			//Increment the tile y position and reset the tile x position, since we started a new row
-			tileY += m_TileSize;
-			tileX = 0.0f;
+			MessageBox(0, "Level Loading Failed", "Error", MB_OK);
+			in.close();
+			exit(0);
 		}
-	}
-
-	//The level is loaded, reset everything
-	reset();
+		in.close();			
+	}	
 }
 
 
@@ -445,7 +404,7 @@ unsigned int Level::getNumberOfVerticalTiles()
 
 bool Level::validateTileCoordinates(int aCoordinatesX, int aCoordinatesY)
 {
-	if (aCoordinatesX < 0 || aCoordinatesY < 0 || aCoordinatesX >= (int)getNumberOfHorizontalTiles() || aCoordinatesY >= (int)getNumberOfVerticalTiles())
+	if (aCoordinatesX < -2 || aCoordinatesY < -2 || aCoordinatesX >= (int)getNumberOfHorizontalTiles() || aCoordinatesY >= (int)getNumberOfVerticalTiles())
 	{
 		return false;
 	}
@@ -649,6 +608,27 @@ void Level::queueForPathFinding(Unit * unit)
 void Level::addEnemyUnit(Unit *unit)
 {
 	m_Units.push_back(unit);
-	unit->setDestinationTile(m_Player->getCurrentTile());
+	unit->setDestinationTile(m_TargetTile);
 	queueForPathFinding(unit);
+}
+
+int Level::getNumberOfLives()
+{
+	return m_Lives;
+}
+
+
+void Level::setNumberOfLives(int lives)
+{
+	m_Lives = lives;
+}
+
+void Level::decrementLives(int livesToSubract)
+{
+	m_Lives -= livesToSubract;
+}
+
+void Level::gameOver()
+{
+	ScreenManager::getInstance()->switchScreen(GAME_OVER_SCREEN_NAME);
 }

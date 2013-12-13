@@ -28,6 +28,8 @@ public:
 	void paint();
 	//void reset();
 
+	void setSpawnRate(double spawnRate);
+
 	//Implementing GameObject's pure virtual method
 	const char* getType();
 

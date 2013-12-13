@@ -91,11 +91,19 @@ public:
     void togglePaintTileIndexes();
 	void queueForPathFinding (Unit * unit);   
 	void addEnemyUnit(Unit *unit);
-	Tile *getPlayerTile();
+	Tile * getTargetTile();
+
+	//Lives
+	int getNumberOfLives();
+	void setNumberOfLives(int lives);
+	void decrementLives(int livesToSubract);
+
 protected:
 	//Disables the old tiles selection (if ground tile) and
 	//enables the newly selected tiles selection (if ground tile)
 	void setSelectedTileIndex(int selectedIndex);
+
+	void gameOver();
     
 	//Protected Member variables
 	Player* m_Player;
@@ -113,6 +121,11 @@ protected:
 	std::vector<SpawnPoint*> m_EnemySpawnPoints;
 
 	OpenGLTexture * m_LevelBkg;
+	Tile * m_TargetTile;
+
+	int m_Lives;
+
 };
+
 
 #endif

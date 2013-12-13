@@ -46,6 +46,15 @@ FileMenu::~FileMenu()
 		m_OverlayTexture = NULL;
 	}
 
+	for (int i = 0; i < m_BkgTextureCount; i++)
+	{
+		if (m_BkgTextureList[i] != NULL)
+		{
+			delete m_BkgTextureList[i];
+			m_BkgTextureList[i] = NULL;
+		}
+	}
+
 	if (m_Buttons != NULL)
 	{
 		delete m_Buttons;
@@ -215,12 +224,8 @@ void FileMenu::buttonPressed(int buttonNumber)
 	}
 	else
 	{
-		static bool screenCreated = false;;
-		if (screenCreated == false)
-		{
-			ScreenManager::getInstance()->addScreen(new Game());
-			screenCreated = true;
-		}
+		//Create game screen
+		ScreenManager::getInstance()->addScreen(new Game());		
 
 		std::string fileName;
 		fileName.append("Level");

@@ -109,6 +109,14 @@ OpenGLTexture::~OpenGLTexture()
     }
 }
 
+void OpenGLTexture::setSourceFrame(float x, float y, float width, float height)
+{
+	m_TextureInfo->sourceX = x;
+	m_TextureInfo->sourceY = y;
+	m_TextureInfo->sourceWidth = width;
+	m_TextureInfo->sourceHeight = height;
+}
+
 unsigned int OpenGLTexture::getFormat()
 {
     return m_TextureInfo->textureFormat;

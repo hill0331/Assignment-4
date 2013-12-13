@@ -61,6 +61,11 @@ void SpawnPoint::setCurrentTile(Tile* tile)
 	setPosition(tile->getX(), tile->getY());
 }
 
+void SpawnPoint::setSpawnRate(double spawnRate)
+{
+	m_SpawnRate = spawnRate;
+}
+
 
 
 

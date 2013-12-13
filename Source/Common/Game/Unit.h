@@ -39,7 +39,7 @@ public:
 	float getScore();
 	void setScore(float score);
 	void setState(PathState state);
-	void deleteRequested();
+	void deleteRequested(bool deleteRequested);
 	virtual void reachedDestination();
 protected:
 	//Animation methods

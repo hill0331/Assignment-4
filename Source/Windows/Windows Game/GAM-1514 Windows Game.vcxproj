@@ -164,8 +164,10 @@
     <ClCompile Include="..\..\Common\Menus\Buttons\ButtonGroup.cpp" />
     <ClCompile Include="..\..\Common\Menus\Buttons\Button.cpp" />
     <ClCompile Include="..\..\Common\Menus\Buttons\FileMenuButtonGroup.cpp" />
+    <ClCompile Include="..\..\Common\Menus\Buttons\GameOverScreenButtonGroup.cpp" />
     <ClCompile Include="..\..\Common\Menus\Buttons\MainMenuButtonGroup.cpp" />
     <ClCompile Include="..\..\Common\Menus\FileMenu.cpp" />
+    <ClCompile Include="..\..\Common\Menus\GameOverScreen.cpp" />
     <ClCompile Include="..\..\Common\Menus\MainMenu.cpp" />
     <ClCompile Include="..\..\Common\Menus\Menu.cpp" />
     <ClCompile Include="..\..\Common\Menus\SplashScreen.cpp" />
@@ -180,6 +182,7 @@
     <ClCompile Include="..\..\Common\Screen Manager\Screen.cpp" />
     <ClCompile Include="..\..\Common\Screen Manager\ScreenManager.cpp" />
     <ClCompile Include="..\..\Common\UI\UIButton.cpp" />
+    <ClCompile Include="..\..\Common\UI\UIFont.cpp" />
     <ClCompile Include="..\..\Common\UI\UISideMenu.cpp" />
     <ClCompile Include="..\..\Common\UI\UIToggle.cpp" />
     <ClCompile Include="..\..\Common\Utils\Logger\Logger.cpp" />
@@ -257,8 +260,10 @@
     <ClInclude Include="..\..\Common\Menus\Buttons\ButtonGroup.h" />
     <ClInclude Include="..\..\Common\Menus\Buttons\Button.h" />
     <ClInclude Include="..\..\Common\Menus\Buttons\FileMenuButtonGroup.h" />
+    <ClInclude Include="..\..\Common\Menus\Buttons\GameOverScreenButtonGroup.h" />
     <ClInclude Include="..\..\Common\Menus\Buttons\MainMenuButtonGroup.h" />
     <ClInclude Include="..\..\Common\Menus\FileMenu.h" />
+    <ClInclude Include="..\..\Common\Menus\GameOverScreen.h" />
     <ClInclude Include="..\..\Common\Menus\MainMenu.h" />
     <ClInclude Include="..\..\Common\Menus\Menu.h" />
     <ClInclude Include="..\..\Common\Menus\SplashScreen.h" />
@@ -276,6 +281,7 @@
     <ClInclude Include="..\..\Common\Screen Manager\Screen.h" />
     <ClInclude Include="..\..\Common\Screen Manager\ScreenManager.h" />
     <ClInclude Include="..\..\Common\UI\UIButton.h" />
+    <ClInclude Include="..\..\Common\UI\UIFont.h" />
     <ClInclude Include="..\..\Common\UI\UISideMenu.h" />
     <ClInclude Include="..\..\Common\UI\UIToggle.h" />
     <ClInclude Include="..\..\Common\Utils\Logger\Logger.h" />

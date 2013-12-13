@@ -3,7 +3,7 @@
 //	Creation date:	October 15th 2013
 //	Course number:	GAM1514
 //	Professor:		Dan Lingman
-//	Purpose:		Code for the Game Over menu buttons
+//	Purpose:		Button code for the Main Menu
 //	Modified:		October 30th 2013
 //
 
