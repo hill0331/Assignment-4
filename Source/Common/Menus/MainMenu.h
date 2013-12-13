@@ -4,7 +4,7 @@
 //	Course number:	GAM1514
 //	Professor:		Dan Lingman
 //	Purpose:		Main Menu Screen Code
-//	Modified:		October 30th 2013
+//	Modified:		December 12th 2013
 //
 
 #ifndef MAIN_MENU_H

@@ -11,15 +11,35 @@ const char* RES_TILE_SCORE_NUMBERS[] = {"Numbers0", "Numbers1", "Numbers2", "Num
 const int RES_TILE_SCORE_NUMBERS_COUNT = 10;
 
 //Tiles
-const char* RES_TILE_GROUND = "TileGround";
-const char* RES_TILE_GRASS = "TileGrass";
-const char* RES_TILE_ROAD = "TileRoad";
-const char* RES_TILE_ROCK = "TileRock";
-const char* RES_TILE_TREE = "TileTree";
-const char* RES_TILE_WATER = "TileWater";
+const char* RES_TILE_GRASS = "tiles/grass";
+const char* RES_TILE_PAVEMENT = "tiles/pavement";
+const char* RES_TILE_ROCK = "tiles/rock";
+const char* RES_TILE_SAND = "tiles/sand";
+const char* RES_TILE_TREE = "tiles/tree";
+const char* RES_TILE_WATER = "tiles/water";
+
+const char* RES_TILE_ENEMY_SPAWN = "tiles/enemySpawn";
+const char* RES_TILE_PLAYER_SPAWN = "tiles/playerSpawn";
+const char* RES_TILE_TARGET = "tiles/targetTile";
+
+const char* RES_TILE_BLANK = "tiles/blankTile";
+const char* RES_TILE_UNWALKABLE = "tiles/unwalkable";
+
+//Wall Tiles
+const char* RES_TILE_WALL_STRAIGHT = "tiles/wall/WallTile-Straight";
+const char* RES_TILE_WALL_CORNER_90 = "tiles/wall/WallTile-Corner-90";
+const char* RES_TILE_WALL_EDGE_STRAIGHT = "tiles/wall/WallTileEdge-Straight";
+const char* RES_TILE_WALL_EDGE_CORNER_90 = "tiles/wall/WallTileEdge-Corner-90";
+const char* RES_TILE_WALL_EDGE_FILLER = "tiles/wall/WallTileEdge-Filler";
 
 //Game overlay
 const char* GAME_MAP_OVERLAY_TEXTURE = "UI/Game/Overlay";
+
+//Level Backgrounds
+const char* RES_BACKGROUND_LEVEL1 = "backgrounds/Level-1";
+
+//Tile Grid
+const char * RES_TILE_GRID = "tiles/GridOverlay";
 
 //Menu Resources
 //Splash Screen

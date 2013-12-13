@@ -65,9 +65,6 @@
     <Filter Include="Source Files\UI">
       <UniqueIdentifier>{7157ca52-6940-4a95-b7f3-c2a4cb703f80}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Level Editor">
-      <UniqueIdentifier>{64fe5859-db83-4f12-985b-4e988cc2e43c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Constants\Menu">
       <UniqueIdentifier>{f3ac26bb-fe05-4684-acb9-382423a8d844}</UniqueIdentifier>
     </Filter>
@@ -82,6 +79,9 @@
     </Filter>
     <Filter Include="Source Files\Menus\Buttons">
       <UniqueIdentifier>{b334e300-6dd1-4d68-8415-e252552a9a8b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Tiles\WallTiles">
+      <UniqueIdentifier>{5bcd71d4-4563-4820-a6ea-741121965a40}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -259,12 +259,6 @@
     <ClCompile Include="..\..\Common\Game\Player.cpp">
       <Filter>Source Files\Game</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Common\Game\Tiles\GroundTile.cpp">
-      <Filter>Source Files\Game\Tiles</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Common\Game\Tiles\Tile.cpp">
-      <Filter>Source Files\Game\Tiles</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Common\Menus\MainMenu.cpp">
       <Filter>Source Files\Menus</Filter>
     </ClCompile>
@@ -280,9 +274,6 @@
     <ClCompile Include="..\..\Common\UI\UIToggle.cpp">
       <Filter>Source Files\UI</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Common\Level Editor\LevelEditor.cpp">
-      <Filter>Source Files\Level Editor</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Common\OpenGL\OpenGLTextureCache.cpp">
       <Filter>Source Files\OpenGL</Filter>
     </ClCompile>
@@ -294,27 +285,6 @@
     </ClCompile>
     <ClCompile Include="..\..\Common\Constants\Resources\ResourceConstants.cpp">
       <Filter>Source Files\Constants\Resources</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Common\Game\Tiles\GrassTile.cpp">
-      <Filter>Source Files\Game\Tiles</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Common\Game\Tiles\RoadTile.cpp">
-      <Filter>Source Files\Game\Tiles</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Common\Game\Tiles\RockTile.cpp">
-      <Filter>Source Files\Game\Tiles</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Common\Game\Tiles\TreeTile.cpp">
-      <Filter>Source Files\Game\Tiles</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Common\Game\Tiles\WaterTile.cpp">
-      <Filter>Source Files\Game\Tiles</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Common\Menus\SaveMenu.cpp">
-      <Filter>Source Files\Menus</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Common\Menus\LoadLevelMenu.cpp">
-      <Filter>Source Files\Menus</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Common\Path\Node.cpp">
       <Filter>Source Files\Path</Filter>
@@ -348,6 +318,57 @@
     </ClCompile>
     <ClCompile Include="..\..\Common\Menus\Buttons\FileMenuButtonGroup.cpp">
       <Filter>Source Files\Menus\Buttons</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Common\Game\Tiles\EmptyTile.cpp">
+      <Filter>Source Files\Game\Tiles</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Common\Game\Tiles\EnemySpawnTile.cpp">
+      <Filter>Source Files\Game\Tiles</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Common\Game\Tiles\GrassTile.cpp">
+      <Filter>Source Files\Game\Tiles</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Common\Game\Tiles\PavementTile.cpp">
+      <Filter>Source Files\Game\Tiles</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Common\Game\Tiles\PlayerSpawnTile.cpp">
+      <Filter>Source Files\Game\Tiles</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Common\Game\Tiles\RockTile.cpp">
+      <Filter>Source Files\Game\Tiles</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Common\Game\Tiles\SandTile.cpp">
+      <Filter>Source Files\Game\Tiles</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Common\Game\Tiles\TargetTile.cpp">
+      <Filter>Source Files\Game\Tiles</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Common\Game\Tiles\Tile.cpp">
+      <Filter>Source Files\Game\Tiles</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Common\Game\Tiles\TreeTile.cpp">
+      <Filter>Source Files\Game\Tiles</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Common\Game\Tiles\UnwalkableTile.cpp">
+      <Filter>Source Files\Game\Tiles</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Common\Game\Tiles\WaterTile.cpp">
+      <Filter>Source Files\Game\Tiles</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Common\Game\Tiles\WallTiles\WallTileStraight.cpp">
+      <Filter>Source Files\Game\Tiles\WallTiles</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Common\Game\Tiles\WallTiles\WallTileCorner90.cpp">
+      <Filter>Source Files\Game\Tiles\WallTiles</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Common\Game\Tiles\WallTiles\WallTileEdgeCorner90.cpp">
+      <Filter>Source Files\Game\Tiles\WallTiles</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Common\Game\Tiles\WallTiles\WallTileEdgeFiller.cpp">
+      <Filter>Source Files\Game\Tiles\WallTiles</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Common\Game\Tiles\WallTiles\WallTileEdgeStraight.cpp">
+      <Filter>Source Files\Game\Tiles\WallTiles</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -525,12 +546,6 @@
     <ClInclude Include="..\..\Common\Game\Player.h">
       <Filter>Source Files\Game</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Common\Game\Tiles\GroundTile.h">
-      <Filter>Source Files\Game\Tiles</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Common\Game\Tiles\Tile.h">
-      <Filter>Source Files\Game\Tiles</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Common\Menus\MainMenu.h">
       <Filter>Source Files\Menus</Filter>
     </ClInclude>
@@ -546,9 +561,6 @@
     <ClInclude Include="..\..\Common\UI\UIToggle.h">
       <Filter>Source Files\UI</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Common\Level Editor\LevelEditor.h">
-      <Filter>Source Files\Level Editor</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Common\OpenGL\OpenGLTextureCache.h">
       <Filter>Source Files\OpenGL</Filter>
     </ClInclude>
@@ -560,27 +572,6 @@
     </ClInclude>
     <ClInclude Include="..\..\Common\Constants\Resources\ResourceConstants.h">
       <Filter>Source Files\Constants\Resources</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Common\Game\Tiles\GrassTile.h">
-      <Filter>Source Files\Game\Tiles</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Common\Game\Tiles\RoadTile.h">
-      <Filter>Source Files\Game\Tiles</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Common\Game\Tiles\RockTile.h">
-      <Filter>Source Files\Game\Tiles</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Common\Game\Tiles\TreeTile.h">
-      <Filter>Source Files\Game\Tiles</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Common\Game\Tiles\WaterTile.h">
-      <Filter>Source Files\Game\Tiles</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Common\Menus\SaveMenu.h">
-      <Filter>Source Files\Menus</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Common\Menus\LoadLevelMenu.h">
-      <Filter>Source Files\Menus</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Common\Path\Node.h">
       <Filter>Source Files\Path</Filter>
@@ -614,6 +605,57 @@
     </ClInclude>
     <ClInclude Include="..\..\Common\Menus\Buttons\FileMenuButtonGroup.h">
       <Filter>Source Files\Menus\Buttons</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Common\Game\Tiles\EmptyTile.h">
+      <Filter>Source Files\Game\Tiles</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Common\Game\Tiles\EnemySpawnTile.h">
+      <Filter>Source Files\Game\Tiles</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Common\Game\Tiles\GrassTile.h">
+      <Filter>Source Files\Game\Tiles</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Common\Game\Tiles\PavementTile.h">
+      <Filter>Source Files\Game\Tiles</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Common\Game\Tiles\PlayerSpawnTile.h">
+      <Filter>Source Files\Game\Tiles</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Common\Game\Tiles\RockTile.h">
+      <Filter>Source Files\Game\Tiles</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Common\Game\Tiles\SandTile.h">
+      <Filter>Source Files\Game\Tiles</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Common\Game\Tiles\TargetTile.h">
+      <Filter>Source Files\Game\Tiles</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Common\Game\Tiles\Tile.h">
+      <Filter>Source Files\Game\Tiles</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Common\Game\Tiles\TreeTile.h">
+      <Filter>Source Files\Game\Tiles</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Common\Game\Tiles\UnwalkableTile.h">
+      <Filter>Source Files\Game\Tiles</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Common\Game\Tiles\WaterTile.h">
+      <Filter>Source Files\Game\Tiles</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Common\Game\Tiles\WallTiles\WallTileCorner90.h">
+      <Filter>Source Files\Game\Tiles\WallTiles</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Common\Game\Tiles\WallTiles\WallTileEdgeCorner90.h">
+      <Filter>Source Files\Game\Tiles\WallTiles</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Common\Game\Tiles\WallTiles\WallTileEdgeFiller.h">
+      <Filter>Source Files\Game\Tiles\WallTiles</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Common\Game\Tiles\WallTiles\WallTileEdgeStraight.h">
+      <Filter>Source Files\Game\Tiles\WallTiles</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Common\Game\Tiles\WallTiles\WallTileStraight.h">
+      <Filter>Source Files\Game\Tiles\WallTiles</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

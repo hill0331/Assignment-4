@@ -1,11 +1,3 @@
-//
-//  RockTile.h
-//  GAM-1514 Game
-//
-//  Created by Dan Lingman on 2013-11-09.
-//  Copyright (c) 2013 Algonquin College. All rights reserved.
-//
-
 #ifndef ROCK_TILE_H
 #define ROCK_TILE_H
 
@@ -15,12 +7,13 @@
 class RockTile : public Tile
 {
 public:
-	RockTile(const char* textureName = RES_TILE_ROCK);
+	RockTile(float rotation);
 	virtual ~RockTile();
-	virtual bool isWalkableTile();
+
+	int getWeight();
+  
     //Return the type of the tile
     const char* getType();
-	int getWeight();
 };
 
 #endif

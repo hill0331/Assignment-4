@@ -1,11 +1,3 @@
-//
-//  Tile.cpp
-//  GAM-1532 OSX Game
-//
-//  Created by Bradley Flood on 2013-03-07.
-//  Copyright (c) 2013 Algonquin College. All rights reserved.
-//
-
 #include "Tile.h"
 #include "../../OpenGL/OpenGL.h"
 #include "../../Utils/Utils.h"
@@ -15,13 +7,15 @@
 #include <math.h> 
 
 
-Tile::Tile(TileType tileType, const char* tileTexture, bool aIsWalkableTile)
+Tile::Tile(TileType tileType, const char* tileTexture, bool aIsWalkableTile, float tileRotation, bool isVisibleInGame)
 {
     //Initialize the walkable tile, selected and path flags
     m_TileType = tileType;
     m_IsWalkableTile = aIsWalkableTile;
     m_IsSelected = false;
     m_IsPath = false;
+	m_Rotation = tileRotation;
+	m_IsVisibleInGame = isVisibleInGame;
     
     //Create the tile texture
     if(tileTexture != NULL)
@@ -36,14 +30,14 @@ Tile::Tile(TileType tileType, const char* tileTexture, bool aIsWalkableTile)
     m_TileIndexNumbers = new OpenGLTexture*[RES_TILE_INDEX_NUMBERS_COUNT];
     for(int i = 0; i < RES_TILE_INDEX_NUMBERS_COUNT; i++)
     {
-        m_TileIndexNumbers[i] = OpenGLTextureCache::getInstance()->getTexture(RES_TILE_INDEX_NUMBERS[i]);
+		m_TileIndexNumbers[i] = NULL; //OpenGLTextureCache::getInstance()->getTexture(RES_TILE_INDEX_NUMBERS[i]);
     }
     
     //Create the tile scoring number OpenGLTextures
     m_TileScoreNumbers = new OpenGLTexture*[RES_TILE_SCORE_NUMBERS_COUNT];
     for(int i = 0; i < RES_TILE_SCORE_NUMBERS_COUNT; i++)
     {
-        m_TileScoreNumbers[i] = OpenGLTextureCache::getInstance()->getTexture(RES_TILE_SCORE_NUMBERS[i]);
+		m_TileScoreNumbers[i] = NULL; //OpenGLTextureCache::getInstance()->getTexture(RES_TILE_SCORE_NUMBERS[i]);
     }
 }
 
@@ -82,7 +76,7 @@ Tile::~Tile()
 
 void Tile::update(double aDelta)
 {
-    
+	
 }
 
 void Tile::paint()
@@ -90,13 +84,14 @@ void Tile::paint()
     //Paint the texture if it is set
     if(m_Texture != NULL)
     {
-        OpenGLRenderer::getInstance()->drawTexture(m_Texture, getX(), getY(), getWidth(), getHeight());
+        OpenGLRenderer::getInstance()->drawTexture(m_Texture, getX(), getY(), getWidth(), getHeight(), getTileRotation());
+		
     }
 
     //Paint the selected texture if this tile is actually selected
     if(isSelected() == true)
     {
-        OpenGLRenderer::getInstance()->drawTexture(m_SelectedTile, getX(), getY(), getWidth(), getHeight());
+		OpenGLRenderer::getInstance()->drawTexture(m_SelectedTile, getX(), getY(), getWidth(), getHeight());
     }
 }
 
@@ -226,4 +221,24 @@ void Tile::setIsPath(bool aIsPath)
 bool Tile::isPath()
 {
 	return m_IsPath;
+}
+
+float Tile::getTileRotation()
+{
+	return m_Rotation;
+}
+
+void Tile::setTileRotation(float rotation)
+{
+	m_Rotation = rotation;
+}
+
+bool Tile::getIsVisibleInGame()
+{
+	return m_IsVisibleInGame;
+}
+
+void Tile::setIsVisibleInGame(bool isVisible)
+{
+	m_IsVisibleInGame = isVisible;
 }

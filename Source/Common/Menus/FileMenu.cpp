@@ -12,6 +12,8 @@
 #include "../Constants/Constants.h"
 #include "../Utils/Utils.h"
 #include "../Screen Manager/ScreenManager.h"
+#include "../Game/Game.h"
+#include "../Game/Level.h"
 
 #include "Buttons/FileMenuButtonGroup.h"
 
@@ -125,7 +127,7 @@ void FileMenu::paint()
 
 const char* FileMenu::getName()
 {
-	return LOAD_MENU_SCREEN_NAME;
+	return FILE_MENU_SCREEN_NAME;
 }
 
 //Screen event method, inherited from the screen class
@@ -206,26 +208,30 @@ void FileMenu::transitionOut(const char* screenName)
 
 void FileMenu::buttonPressed(int buttonNumber)
 {
-	if (buttonNumber == 0)
+	if (buttonNumber == 7)
 	{
-		m_ScreenToTransition = LOAD_MENU_SCREEN_NAME;
+		m_ScreenToTransition = MAIN_MENU_SCREEN_NAME;
 		m_TransitionOut = true;
 	}
-
-	if (buttonNumber == 1)
+	else
 	{
-		m_ScreenToTransition = HIGH_SCORES_SCREEN_NAME;
+		static bool screenCreated = false;;
+		if (screenCreated == false)
+		{
+			ScreenManager::getInstance()->addScreen(new Game());
+			screenCreated = true;
+		}
+
+		std::string fileName;
+		fileName.append("Level");
+		fileName += '0' + (buttonNumber + 1);		
+
+		Game *game = (Game*)ScreenManager::getInstance()->getScreenForName(GAME_SCREEN_NAME);
+		Level *level = game->getLevel();
+		level->load(fileName);
+
+		// and then switch to the game
+		m_ScreenToTransition = GAME_SCREEN_NAME;
 		m_TransitionOut = true;
-	}
-
-	if (buttonNumber == 2)
-	{
-		m_ScreenToTransition = SETTINGS_MENU_SCREEN_NAME;
-		m_TransitionOut = true;
-	}
-
-	if (buttonNumber == 3) //Quit
-	{
-		exit(0);
 	}
 }

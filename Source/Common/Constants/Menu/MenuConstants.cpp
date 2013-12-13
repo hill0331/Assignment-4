@@ -15,5 +15,5 @@ const char* SPLASH_SCREEN_NAME = "SplashScreen";
 const char* MAIN_MENU_SCREEN_NAME = "MainMenu";
 const char* SETTINGS_MENU_SCREEN_NAME = "SettingsMenu";
 const char* SAVE_MENU_SCREEN_NAME = "SaveMenu";
-const char* LOAD_MENU_SCREEN_NAME = "LoadMenu";
+const char* FILE_MENU_SCREEN_NAME = "FileMenu";
 const char* HIGH_SCORES_SCREEN_NAME = "HighScoresScreen";

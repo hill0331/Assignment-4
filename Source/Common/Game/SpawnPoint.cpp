@@ -21,7 +21,7 @@ SpawnPoint::SpawnPoint(Level* aLevel)
 {
 	m_Level = aLevel;
 	m_ElapsedTime = 0.0;
-	m_SpawnRate = 2000.0;
+	m_SpawnRate = 2.0;
 }
 
 SpawnPoint::~SpawnPoint()

@@ -49,8 +49,7 @@ public:
     void reset();
     
     //
-    void load(const char* levelName);
-    void save(const char* levelName);
+	void load(std::string levelName);
 	
 
     //Input methods
@@ -83,9 +82,9 @@ public:
 	Tile* getTileForIndex(int index);
     
     //
-    void setTileTypeAtPosition(TileType tileType, int positionX, int positionY);
-    void setTileTypeAtCoordinates(TileType tileType, int coordinatesX, int coordinatesY);
-    void setTileTypeAtIndex(TileType tileType, int index);
+	void setTileTypeAtPosition(TileType tileType, int positionX, int positionY, float tileRotation);
+	void setTileTypeAtCoordinates(TileType tileType, int coordinatesX, int coordinatesY, float tileRotation);
+	void setTileTypeAtIndex(TileType tileType, int index, float tileRotation);
     
     //Coveniance methods to toggle debug paint methods
     void togglePaintTileScoring();
@@ -111,7 +110,9 @@ protected:
     bool m_PaintTileIndexes;
 	mypq_type m_Queue;
 	std::vector<Unit*> m_Units;
-	SpawnPoint* m_SpawnPoint;
+	std::vector<SpawnPoint*> m_EnemySpawnPoints;
+
+	OpenGLTexture * m_LevelBkg;
 };
 
 #endif

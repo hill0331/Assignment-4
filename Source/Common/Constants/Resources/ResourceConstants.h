@@ -11,15 +11,35 @@ extern const char* RES_TILE_SCORE_NUMBERS[];
 extern const int RES_TILE_SCORE_NUMBERS_COUNT;
 
 //Tiles
-extern const char* RES_TILE_GROUND;
 extern const char* RES_TILE_GRASS;
-extern const char* RES_TILE_ROAD;
+extern const char* RES_TILE_PAVEMENT;
 extern const char* RES_TILE_ROCK;
+extern const char* RES_TILE_SAND;
 extern const char* RES_TILE_TREE;
 extern const char* RES_TILE_WATER;
 
+extern const char* RES_TILE_ENEMY_SPAWN;
+extern const char* RES_TILE_PLAYER_SPAWN;
+extern const char* RES_TILE_TARGET;
+
+extern const char* RES_TILE_BLANK;
+extern const char* RES_TILE_UNWALKABLE;
+
+//Wall Tiles
+extern const char* RES_TILE_WALL_STRAIGHT;
+extern const char* RES_TILE_WALL_CORNER_90;
+extern const char* RES_TILE_WALL_EDGE_STRAIGHT;
+extern const char* RES_TILE_WALL_EDGE_CORNER_90;
+extern const char* RES_TILE_WALL_EDGE_FILLER;
+
 //Game overlay
 extern const char* GAME_MAP_OVERLAY_TEXTURE;
+
+//Level Backgrounds
+extern const char* RES_BACKGROUND_LEVEL1;
+
+//Tile Grid
+extern const char * RES_TILE_GRID;
 
 //Menu Resources
 //Splash Screen

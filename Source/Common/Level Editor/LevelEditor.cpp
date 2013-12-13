@@ -219,7 +219,7 @@ void LevelEditor::sideMenuButtonAction(UISideMenu* sideMenu, UIButton* button, i
 		m_Level->clear();
 		break;
 	case 1:
-		ScreenManager::getInstance()->switchScreen(LOAD_MENU_SCREEN_NAME);
+		ScreenManager::getInstance()->switchScreen(FILE_MENU_SCREEN_NAME);
 		break;
 	case 2:
 		ScreenManager::getInstance()->switchScreen(SAVE_MENU_SCREEN_NAME);

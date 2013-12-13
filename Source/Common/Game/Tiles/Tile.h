@@ -1,11 +1,3 @@
-//
-//  Tile.h
-//  GAM-1532 OSX Game
-//
-//  Created by Bradley Flood on 2013-03-07.
-//  Copyright (c) 2013 Algonquin College. All rights reserved.
-//
-
 #ifndef TILE_H
 #define TILE_H
 
@@ -20,7 +12,7 @@ class Tile : public GameObject
 {
 public:
     //Tile takes on parameter, whether it can be walked on or not
-	Tile(TileType tileType, const char* tileTexture, bool isWalkableTile);
+	Tile(TileType tileType, const char* tileTexture, bool isWalkableTile, float tileRotation, bool isVisibleInGame);
 	virtual ~Tile();
     
     //Update, Paint and reset methods
@@ -52,6 +44,14 @@ public:
     //Sets wether the tile is a path or not
 	virtual void setIsPath(bool isPath);
 	virtual bool isPath();
+
+	//Get and set rotation of texture
+	float getTileRotation();
+	void setTileRotation(float rotation);
+
+	//Get and set the bool to determine if the texture is drawn in game
+	bool getIsVisibleInGame();
+	void setIsVisibleInGame(bool isVisible);
     
 protected:
     //Conveniance method to paint a score number and a certain position
@@ -65,6 +65,8 @@ protected:
     OpenGLTexture* m_SelectedTile;
     OpenGLTexture** m_TileIndexNumbers;
     OpenGLTexture** m_TileScoreNumbers;
+	float m_Rotation;
+	bool m_IsVisibleInGame;
 };
 
 #endif

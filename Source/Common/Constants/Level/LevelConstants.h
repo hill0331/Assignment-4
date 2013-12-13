@@ -1,12 +1,3 @@
-//
-//  LevelConstants.h
-//  GAM-1532 OSX Game
-//
-//  Created by Bradley Flood on 2013-03-07.
-//  Copyright (c) 2013 Algonquin College. All rights reserved.
-// Modified by Dan Lingman on 2013-11-09
-// added additional tile types
-//
 
 #ifndef LEVEL_CONSTANTS_H
 #define LEVEL_CONSTANTS_H
@@ -15,14 +6,24 @@
 //add additional tile types in this enum
 enum TileType
 {
-  TileTypeGround = 0,
-  TileTypeGrass,
-  TileTypeRoad,
-  TileTypeRock,
-  TileTypeTree,
-  TileTypeWater,
-  TileTypeUnknown,
-  TileTypeCount
+	TileTypeEmpty,
+	TileTypeWallStraight,
+	TileTypeWallCorner90,
+	TileTypeWallEdgeStraight,
+	TileTypeWallEdgeCorner90,
+	TileTypeWallEdgeFiller,
+	TileTypeUnwalkable,
+	TileTypeGrass,
+	TileTypePavement,
+	TileTypeRock,
+	TileTypeSand,
+	TileTypeWater,
+	TileTypeTree,
+	TileTypeEnemySpawn,
+	TileTypePlayerSpawn,
+	TileTypeTarget,
+	TileTypeUnknown,
+	TileTypeCount
 };
 
 //Level editor screen name

@@ -1,43 +1,52 @@
 //
 //	Student:		Bradley Hill
-//	Creation date:	October 15th 2013
+//	Creation date:	December 12th 2013
 //	Course number:	GAM1514
 //	Professor:		Dan Lingman
-//	Purpose:		Button code for the Main Menu
-//	Modified:		October 30th 2013
+//	Purpose:		Button code for the File Menu
+//	Modified:		December 12th 2013
 //
 
 #include "FileMenuButtonGroup.h"
 #include "../../Screen Manager/ScreenManager.h"
 #include "Button.h"
-#include "../MainMenu.h"
+#include "../FileMenu.h"
 
 FileMenuButtonGroup::FileMenuButtonGroup()
 {
-	float buttonWidth = 350.0f;
+	float buttonWidth = 220.0f;
 	float buttonHeight = 100.0f;
-	float buttonPadding = ScreenManager::getInstance()->getScreenWidth() * 0.05;
+	float buttonSpacing = ScreenManager::getInstance()->getScreenHeight() * 0.15;
 
-	float buttonX = ScreenManager::getInstance()->getScreenWidth() * 0.23;
-	float buttonY = (float)ScreenManager::getInstance()->getScreenHeight() * 0.87;
+	float row1ButtonX = ScreenManager::getInstance()->getScreenWidth() * 0.35;
+	float row2ButtonX = ScreenManager::getInstance()->getScreenWidth() * 0.55;
+	float buttonInitialY = (float)ScreenManager::getInstance()->getScreenHeight() * 0.3;
 
 
-	Button *playButton = new Button(buttonPadding, buttonY, 350.0f, 100.0f, ENABLED_BUTTON,
-		"/UI/Menus/MainMenu/buttons/SinglePlayer");
+	Button *level1Button = new Button(row1ButtonX, buttonInitialY, buttonWidth, buttonHeight, ENABLED_BUTTON,
+		"/UI/Menus/FileMenu/buttons/Level1-");
 
-	Button *highScoresButton = new Button(buttonX + buttonPadding, buttonY, 350.0f, 100.0f, ENABLED_BUTTON,
-		"/UI/Menus/MainMenu/buttons/MultiPlayer");
+	Button *level2Button = new Button(row1ButtonX, buttonInitialY + buttonSpacing, buttonWidth, buttonHeight, ENABLED_BUTTON,
+		"/UI/Menus/FileMenu/buttons/Level2-");
 
-	Button *settingsButton = new Button(buttonX *2 + buttonPadding, buttonY, 350.0f, 100.0f, ENABLED_BUTTON,
-		"/UI/Menus/MainMenu/buttons/Credits");
+	Button *level3Button = new Button(row1ButtonX, buttonInitialY + buttonSpacing * 2, buttonWidth, buttonHeight, ENABLED_BUTTON,
+		"/UI/Menus/FileMenu/buttons/Level3-");
 
-	Button *exitButton = new Button(buttonX*3 + buttonPadding, buttonY, 350.0f, 100.0f, ENABLED_BUTTON,
-		"UI/Menus/MainMenu/buttons/Exit");
+	Button *level4Button = new Button(row2ButtonX, buttonInitialY, buttonWidth, buttonHeight, ENABLED_BUTTON,
+		"/UI/Menus/FileMenu/buttons/Level4-");
 
-	addButton(playButton);
-	addButton(highScoresButton);
-	addButton(settingsButton);
-	addButton(exitButton);
+	Button *level5Button = new Button(row2ButtonX, buttonInitialY + buttonSpacing, buttonWidth, buttonHeight, ENABLED_BUTTON,
+		"/UI/Menus/FileMenu/buttons/Level5-");
+
+	Button *level6Button = new Button(row2ButtonX, buttonInitialY + buttonSpacing * 2, buttonWidth, buttonHeight, ENABLED_BUTTON,
+		"/UI/Menus/FileMenu/buttons/Level6-");
+
+	addButton(level1Button);
+	addButton(level2Button);
+	addButton(level3Button);
+	addButton(level4Button);
+	addButton(level5Button);
+	addButton(level6Button);
 }
 
 FileMenuButtonGroup::~FileMenuButtonGroup()
@@ -47,6 +56,6 @@ FileMenuButtonGroup::~FileMenuButtonGroup()
 
 void FileMenuButtonGroup::handleButtonTrigger(int buttonNumber)
 {
-	MainMenu* mainMenu = (MainMenu*)ScreenManager::getInstance()->getScreenForName(MAIN_MENU_SCREEN_NAME);
+	FileMenu* mainMenu = (FileMenu*)ScreenManager::getInstance()->getScreenForName(FILE_MENU_SCREEN_NAME);
 	mainMenu->buttonPressed(buttonNumber);
 }
