@@ -16,6 +16,7 @@
 #include "../Menus/GameOverScreen.h"
 #include "../Menus/HighScoresScreen.h"
 #include "../Menus/SettingsMenu.h"
+#include "../Menus/VictoryScreen.h"
 #include <time.h>
 
 
@@ -71,6 +72,7 @@ void ScreenManager::loadScreens()
 	addScreen(new HighScoresScreen());
 	addScreen(new SettingsMenu());
 	addScreen(new GameOverScreen());
+	addScreen(new VictoryScreen());
 }
 
 void ScreenManager::setScreenSize(float aWidth, float aHeight)

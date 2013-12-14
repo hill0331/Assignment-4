@@ -60,4 +60,7 @@ extern const char* SETTINGS_MENU_TITLE_TEXTURE;
 //Game over
 extern const char* GAME_OVER_SCREEN_TITLE_TEXTURE;
 
+//Victory
+extern const char* VICTORY_SCREEN_TITLE_TEXTURE;
+
 #endif 

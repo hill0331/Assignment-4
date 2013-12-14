@@ -391,6 +391,12 @@
     <ClCompile Include="..\..\Common\Menus\Buttons\SettingsMenuButtonGroup.cpp">
       <Filter>Source Files\Menus\Buttons</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Common\Menus\VictoryScreen.cpp">
+      <Filter>Source Files\Menus</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Common\Menus\Buttons\VictoryScreenButtonGroup.cpp">
+      <Filter>Source Files\Menus\Buttons</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="OpenGLWindow.h">
@@ -697,6 +703,12 @@
       <Filter>Source Files\Menus</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Common\Menus\Buttons\SettingsMenuButtonGroup.h">
+      <Filter>Source Files\Menus\Buttons</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Common\Menus\VictoryScreen.h">
+      <Filter>Source Files\Menus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Common\Menus\Buttons\VictoryScreenButtonGroup.h">
       <Filter>Source Files\Menus\Buttons</Filter>
     </ClInclude>
   </ItemGroup>

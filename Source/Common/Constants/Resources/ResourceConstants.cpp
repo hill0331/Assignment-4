@@ -55,7 +55,10 @@ const char* MAIN_MENU_BKG_TEXTURE_1 = "UI/Menus/MainMenu/MenuBkg2";
 const char* HIGH_SCORES_SCREEN_TITLE_TEXTURE = "UI/Menus/HighScores/HighScoresTitle";
 
 //Settings
-const char* SETTINGS_MENU_TITLE_TEXTURE = "UI/Menus/SettingsMenu/SettingsMenuTitle";
+const char* SETTINGS_MENU_TITLE_TEXTURE = "UI/Menus/SettingsMenu/SettingsTitle";
 
 //Game over
 const char* GAME_OVER_SCREEN_TITLE_TEXTURE = "UI/Menus/GameOver/GameOverTitle";
+
+//Victory
+const char* VICTORY_SCREEN_TITLE_TEXTURE = "UI/Menus/VictoryScreen/VictoryTitle";
