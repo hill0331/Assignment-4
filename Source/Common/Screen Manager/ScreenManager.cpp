@@ -9,12 +9,13 @@
 //
 #include "ScreenManager.h"
 #include "Screen.h"
-#include "../Game/Game.h"
+#include "../OpenGL/OpenGL.h"
 #include "../Menus/MainMenu.h"
 #include "../Menus/SplashScreen.h"
 #include "../Menus/FileMenu.h"
 #include "../Menus/GameOverScreen.h"
-#include "../Level Editor/LevelEditor.h"
+#include "../Menus/HighScoresScreen.h"
+#include "../Menus/SettingsMenu.h"
 #include <time.h>
 
 
@@ -67,6 +68,8 @@ void ScreenManager::loadScreens()
 	//addScreen(new SplashScreen());
     addScreen(new MainMenu());	
 	addScreen(new FileMenu());
+	addScreen(new HighScoresScreen());
+	addScreen(new SettingsMenu());
 	addScreen(new GameOverScreen());
 }
 
@@ -123,6 +126,20 @@ void ScreenManager::addScreen(Screen* aScreen)
         //
         m_Screens.push_back(aScreen);
     }
+}
+
+void ScreenManager::removeScreen(const char* aName)
+{
+	//find the screen and return it
+	for (unsigned int i = 0; i < m_Screens.size(); i++)
+	{
+		if (strcmp(m_Screens.at(i)->getName(), aName) == 0)
+		{
+			delete m_Screens.at(i);
+			m_Screens.erase(m_Screens.begin() + i);
+		}
+	}
+	return;
 }
 
 void ScreenManager::switchScreen(Screen* aScreen)

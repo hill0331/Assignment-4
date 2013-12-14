@@ -7,18 +7,18 @@
 //	Modified:		December 12th 2013
 //
 
-#ifndef SETTINGS_MENU_BUTTON_GROUP
-#define SETTINGS_MENU_BUTTON_GROUP
+#ifndef HIGH_SCORES_BUTTON_GROUP
+#define HIGH_SCORES_BUTTON_GROUP
 
 #include <iostream>
 #include "ButtonGroup.h"
 
-class SettingsMenuButtonGroup : public ButtonGroup
+class HighScoresButtonGroup : public ButtonGroup
 {
 
 public:
-	SettingsMenuButtonGroup();
-	virtual ~SettingsMenuButtonGroup();
+	HighScoresButtonGroup();
+	virtual ~HighScoresButtonGroup();
 	void handleButtonTrigger(int buttonNumber);
 
 private:

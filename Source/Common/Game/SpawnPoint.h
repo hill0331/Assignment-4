@@ -12,7 +12,7 @@
 #include "GameObject.h"
 #include <vector>
 #include "Unit.h"
-class Level;
+class EnemyManager;
 class Tile;
 class FastPathFinder;
 
@@ -20,7 +20,7 @@ class FastPathFinder;
 class SpawnPoint : public GameObject
 {
 public:
-	SpawnPoint(Level* level);
+	SpawnPoint(Level* level, EnemyManager* enemyManager);
 	virtual ~SpawnPoint();
 
 	//Update, paint and reset methods
@@ -28,6 +28,7 @@ public:
 	void paint();
 	//void reset();
 
+	void SpawnUnits(int spawnCount);
 	void setSpawnRate(double spawnRate);
 
 	//Implementing GameObject's pure virtual method
@@ -35,10 +36,14 @@ public:
 
 	void setCurrentTile(Tile* tile);
 private:
+	bool m_InfiniteSpawn;
+	int m_SpawnQueue;
 	double m_ElapsedTime;
 	double m_SpawnRate;
 	Tile *m_CurrentTile;
 	Level * m_Level;
+	EnemyManager * m_EnemyManager;
+
 };
 
 #endif

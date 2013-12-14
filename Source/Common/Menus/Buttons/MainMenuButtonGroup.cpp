@@ -16,7 +16,7 @@ MainMenuButtonGroup::MainMenuButtonGroup()
 {
 	float buttonWidth = 350.0f;
 	float buttonHeight = 100.0f;
-	float buttonPadding = ScreenManager::getInstance()->getScreenWidth() * 0.05;
+	float buttonPadding = ScreenManager::getInstance()->getScreenWidth() * 0.045;
 
 	float buttonX = ScreenManager::getInstance()->getScreenWidth() * 0.23;
 	float buttonY = (float)ScreenManager::getInstance()->getScreenHeight() * 0.87;
@@ -26,10 +26,10 @@ MainMenuButtonGroup::MainMenuButtonGroup()
 		"/UI/Menus/MainMenu/buttons/SinglePlayer");
 
 	Button *highScoresButton = new Button(buttonX + buttonPadding, buttonY, 350.0f, 100.0f, ENABLED_BUTTON,
-		"/UI/Menus/MainMenu/buttons/MultiPlayer");
+		"/UI/Menus/MainMenu/buttons/highScores");
 
 	Button *settingsButton = new Button(buttonX *2 + buttonPadding, buttonY, 350.0f, 100.0f, ENABLED_BUTTON,
-		"/UI/Menus/MainMenu/buttons/Credits");
+		"/UI/Menus/MainMenu/buttons/settings");
 
 	Button *exitButton = new Button(buttonX*3 + buttonPadding, buttonY, 350.0f, 100.0f, ENABLED_BUTTON,
 		"UI/Menus/MainMenu/buttons/Exit");

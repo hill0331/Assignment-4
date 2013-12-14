@@ -38,10 +38,6 @@ const char* FAST_FOARWARD_2X_TEXTURE = "UI/Game/FastForward2X";
 const char* FAST_FOARWARD_5X_TEXTURE = "UI/Game/FastForward5X";
 const char* HUD_BORDER_TEXTURE = "UI/Game/HUDBorder";
 
-
-//Level Backgrounds
-const char* RES_BACKGROUND_LEVEL1 = "backgrounds/Level-1";
-
 //Tile Grid
 const char * RES_TILE_GRID = "tiles/GridOverlay";
 
@@ -53,4 +49,11 @@ const char* SPLASH_SCREEN_LOGO_TEXTURE = "UI/Menus/SplashScreen/FullLogo";
 const char* MAIN_MENU_BKG_TEXTURE_0 = "UI/Menus/MainMenu/MenuBkg1";
 const char* MAIN_MENU_BKG_TEXTURE_1 = "UI/Menus/MainMenu/MenuBkg2";
 
+//High Scores
+const char* HIGH_SCORES_SCREEN_TITLE_TEXTURE = "UI/Menus/HighScores/HighScoresTitle";
+
+//Settings
+const char* SETTINGS_MENU_TITLE_TEXTURE = "UI/Menus/SettingsMenu/SettingsMenuTitle";
+
+//Game over
 const char* GAME_OVER_SCREEN_TITLE_TEXTURE = "UI/Menus/GameOver/GameOverTitle";

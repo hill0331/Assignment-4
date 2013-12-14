@@ -8,6 +8,7 @@
 
 #include "EnemyUnit.h"
 #include "Level.h"
+#include "EnemyManager.h"
 #include "Tiles/Tile.h"
 #include "../OpenGL/OpenGL.h"
 #include "../Constants/Constants.h"
@@ -18,8 +19,9 @@
 #include "../Utils/Logger/Logger.h"
 #include "../Screen Manager/ScreenManager.h"
 
-EnemyUnit::EnemyUnit(Level* aLevel):Unit(aLevel)
+EnemyUnit::EnemyUnit(Level* aLevel, EnemyManager * enemyManager) :Unit(aLevel, enemyManager)
 {
+	m_UnitHealth = 10;
 	setScore(10);	
 }
 
@@ -43,18 +45,31 @@ void EnemyUnit::paint()
 
 void EnemyUnit::reachedDestination()
 {
-	if (m_CurrentTile == m_Level->getTargetTile()) 
+	if (m_CurrentTile == m_EnemyManager->getTargetTile()) 
 	{
-		m_Level->decrementLives(1);
+		m_Level->decrementLives(1);		
 		setIsActive(false);
 	}
 	else
 	{
 
 		setScore(10);
-		m_DestinationTile = m_Level->getTargetTile();
-		m_Level->queueForPathFinding(this);
+		setDestinationTile(m_EnemyManager->getTargetTile());
 	}
-	
 
+}
+
+int EnemyUnit::getUnitHealth()
+{
+	return m_UnitHealth;
+}
+
+void EnemyUnit::setUnitHealth(int health)
+{
+	m_UnitHealth = health;
+}
+
+void EnemyUnit::decrementUnitHealth(int healthToSubtract)
+{
+	m_UnitHealth -= healthToSubtract;
 }

@@ -41,12 +41,16 @@ FileMenuButtonGroup::FileMenuButtonGroup()
 	Button *level6Button = new Button(row2ButtonX, buttonInitialY + buttonSpacing * 2, buttonWidth, buttonHeight, ENABLED_BUTTON,
 		"/UI/Menus/FileMenu/buttons/Level6-");
 
+	Button *backButton = new Button(ScreenManager::getInstance()->getScreenWidth() * 0.03, ScreenManager::getInstance()->getScreenHeight() * 0.87, 200.0f, 75.0f, ENABLED_BUTTON,
+		"/UI/Menus/HighScores/buttons/back");
+
 	addButton(level1Button);
 	addButton(level2Button);
 	addButton(level3Button);
 	addButton(level4Button);
 	addButton(level5Button);
 	addButton(level6Button);
+	addButton(backButton);
 }
 
 FileMenuButtonGroup::~FileMenuButtonGroup()
@@ -56,6 +60,6 @@ FileMenuButtonGroup::~FileMenuButtonGroup()
 
 void FileMenuButtonGroup::handleButtonTrigger(int buttonNumber)
 {
-	FileMenu* mainMenu = (FileMenu*)ScreenManager::getInstance()->getScreenForName(FILE_MENU_SCREEN_NAME);
-	mainMenu->buttonPressed(buttonNumber);
+	FileMenu* fileMenu = (FileMenu*)ScreenManager::getInstance()->getScreenForName(FILE_MENU_SCREEN_NAME);
+	fileMenu->buttonPressed(buttonNumber);
 }

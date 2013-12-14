@@ -47,6 +47,12 @@ Game::~Game()
 		m_Level = NULL;
 	}
 
+	if (m_Font != NULL)
+	{
+		delete m_Font;
+		m_Font = NULL;
+	}
+
 	if (m_TowersMenu != NULL)
 	{
 		delete m_TowersMenu;
@@ -80,7 +86,7 @@ void Game::screenWillAppear()
 
 void Game::update(double delta)
 {
-	m_ElapsedGameTime += delta;	
+	m_ElapsedGameTime += delta * m_FastForwardState;
 
 	if (m_Level != NULL)
 	{
@@ -140,7 +146,7 @@ void Game::paint()
 
 		//Score
 		oss.str(std::string());
-		//oss << m_Level->getPlayerScore();
+		oss << m_Level->getPlayerScore();
 
 		std::string score = "SCORE   ";
 		score.append(oss.str());

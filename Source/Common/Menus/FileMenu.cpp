@@ -217,7 +217,7 @@ void FileMenu::transitionOut(const char* screenName)
 
 void FileMenu::buttonPressed(int buttonNumber)
 {
-	if (buttonNumber == 7)
+	if (buttonNumber == 6)
 	{
 		m_ScreenToTransition = MAIN_MENU_SCREEN_NAME;
 		m_TransitionOut = true;

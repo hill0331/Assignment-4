@@ -8,6 +8,7 @@
 
 #include "Unit.h"
 #include "Level.h"
+#include "EnemyManager.h"
 #include "Tiles/Tile.h"
 #include "../OpenGL/OpenGL.h"
 #include "../Constants/Constants.h"
@@ -17,7 +18,7 @@
 #include "../Path/FastPathFinder.h"
 #include "../Utils/Logger/Logger.h"
 
-Unit::Unit(Level* aLevel)
+Unit::Unit(Level* aLevel, EnemyManager* enemyManager)
 {
 	//Initialize the current and destination tiles to NULL
 	m_CurrentTile = NULL;
@@ -32,6 +33,7 @@ Unit::Unit(Level* aLevel)
 	//Initialize the player's size
 	setSize((float)PLAYER_SIZE, (float)PLAYER_SIZE);
 	m_Level = aLevel;
+	m_EnemyManager = enemyManager;
 	m_FastPathFinder = NULL;
 	m_StartRequested = false;
 	m_State = AT_DESTINATION;
@@ -75,7 +77,8 @@ void Unit::update(double aDelta)
 		// doing it like this means that we won't be in the middle of processing stuff
 		// when we evaporate.
 	}
-	if (m_ResetRequested == false) {
+	if (m_ResetRequested == false)
+	{
 		switch(m_State)
 		{
 		case STATIONARY:
@@ -134,11 +137,19 @@ void Unit::update(double aDelta)
 					Node * currentNode = m_FastPathFinder->getPathElement(m_PathIndex);
 					m_CurrentTile = m_Level->getTileForCoordinates(currentNode->getX(),currentNode->getY());
 				}
-				else {
+				else 
+				{
 					Node * currentNode = m_FastPathFinder->getPathElement(m_PathIndex);
-					Node * nextNode = m_FastPathFinder->getPathElement(m_PathIndex+1);
-					m_CurrentTile = m_Level->getTileForCoordinates(currentNode->getX(),currentNode->getY());
-					m_NextTile = m_Level->getTileForCoordinates(nextNode->getX(),nextNode->getY());
+					Node * nextNode = m_FastPathFinder->getPathElement(m_PathIndex + 1);
+					m_NextTile = m_Level->getTileForCoordinates(nextNode->getX(), nextNode->getY());
+
+					/*if (m_NextTile->isWalkableTile() == false)
+					{
+						m_State = OBSTACLE;
+						break;
+					}*/
+					
+					m_CurrentTile = m_Level->getTileForCoordinates(currentNode->getX(),currentNode->getY());					
 					m_SX = m_CurrentTile->getX()+3;
 					m_SY = m_CurrentTile->getY()+3;
 					m_TX = m_NextTile->getX()+3;
@@ -157,7 +168,8 @@ void Unit::update(double aDelta)
 			reachedDestination();
 			break;
 		case OBSTACLE:
-			// will get back to this.
+			//Find a new path
+			m_State = START;
 			break;
 		}
 	}
@@ -208,7 +220,7 @@ void Unit::setDestinationTile(Tile* tile)
 	//Set the destination tile pointer
 	m_DestinationTile = tile;
 	m_StartRequested = true;
-	m_Level->queueForPathFinding(this);
+	m_EnemyManager->queueForPathFinding(this);
 }
 
 float Unit::animate(float aCurrent, float aTarget, double aDelta)
@@ -255,4 +267,9 @@ void Unit::setScore(float score)
 void Unit::setState(PathState state)
 {
 	m_State = state;
+}
+
+PathState Unit::getState()
+{
+	return m_State;
 }

@@ -262,9 +262,6 @@
     <ClCompile Include="..\..\Common\Menus\MainMenu.cpp">
       <Filter>Source Files\Menus</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Common\Menus\Menu.cpp">
-      <Filter>Source Files\Menus</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Common\UI\UIButton.cpp">
       <Filter>Source Files\UI</Filter>
     </ClCompile>
@@ -378,6 +375,21 @@
     </ClCompile>
     <ClCompile Include="..\..\Common\UI\UIFont.cpp">
       <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Common\Game\EnemyManager.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Common\Menus\HighScoresScreen.cpp">
+      <Filter>Source Files\Menus</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Common\Menus\Buttons\HighScoresButtonGroup.cpp">
+      <Filter>Source Files\Menus\Buttons</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Common\Menus\SettingsMenu.cpp">
+      <Filter>Source Files\Menus</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Common\Menus\Buttons\SettingsMenuButtonGroup.cpp">
+      <Filter>Source Files\Menus\Buttons</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -558,9 +570,6 @@
     <ClInclude Include="..\..\Common\Menus\MainMenu.h">
       <Filter>Source Files\Menus</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Common\Menus\Menu.h">
-      <Filter>Source Files\Menus</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Common\UI\UIButton.h">
       <Filter>Source Files\UI</Filter>
     </ClInclude>
@@ -674,6 +683,21 @@
     </ClInclude>
     <ClInclude Include="..\..\Common\UI\UIFont.h">
       <Filter>Source Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Common\Game\EnemyManager.h">
+      <Filter>Source Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Common\Menus\HighScoresScreen.h">
+      <Filter>Source Files\Menus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Common\Menus\Buttons\HighScoresButtonGroup.h">
+      <Filter>Source Files\Menus\Buttons</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Common\Menus\SettingsMenu.h">
+      <Filter>Source Files\Menus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Common\Menus\Buttons\SettingsMenuButtonGroup.h">
+      <Filter>Source Files\Menus\Buttons</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

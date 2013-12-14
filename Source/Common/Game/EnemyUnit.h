@@ -15,11 +15,12 @@
 class Level;
 class Tile;
 class FastPathFinder;
+class EnemyManager;
 
 class EnemyUnit : public Unit
 {
 public:
-	EnemyUnit(Level* level);
+	EnemyUnit(Level* level, EnemyManager * enemyManager);
 	virtual ~EnemyUnit();
 
 	//Update, paint and reset methods
@@ -32,7 +33,13 @@ public:
 
 	//Setter methods for the current and destination tiles
 	void reachedDestination();
+
+	int getUnitHealth();
+	void setUnitHealth(int health);
+	void decrementUnitHealth(int healthToSubtract);
+
 protected:
+	int m_UnitHealth;
 
 };
 

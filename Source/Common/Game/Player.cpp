@@ -17,7 +17,7 @@
 #include "../Path/FastPathFinder.h"
 #include "../Utils/Logger/Logger.h"
 
-Player::Player(Level* aLevel) :Unit(aLevel)
+Player::Player(Level* aLevel, EnemyManager * enemyManager) :Unit(aLevel, enemyManager)
 {
     setScore(20);
 }

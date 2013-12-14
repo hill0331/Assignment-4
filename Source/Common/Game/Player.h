@@ -20,7 +20,7 @@ class FastPathFinder;
 class Player : public Unit
 {
 public:
-	Player(Level* level);
+	Player(Level* aLevel, EnemyManager * enemyManager);
 	virtual ~Player();
 
 	//Update, paint and reset methods

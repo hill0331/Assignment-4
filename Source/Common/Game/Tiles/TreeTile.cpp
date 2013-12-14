@@ -15,7 +15,7 @@ TreeTile::~TreeTile()
 
 int TreeTile::getWeight()
 {
-	return 30;
+	return 40;
 }
 
 const char* TreeTile::getType()

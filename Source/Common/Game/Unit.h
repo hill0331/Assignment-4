@@ -13,6 +13,7 @@
 #include <vector>
 
 class Level;
+class EnemyManager;
 class Tile;
 class FastPathFinder;
 
@@ -20,7 +21,7 @@ enum PathState {START=0, ABOUT_TO_MOVE, MOVING, AT_NEXT_NODE, AT_DESTINATION, OB
 class Unit : public GameObject
 {
 public:
-	Unit(Level* level);
+	Unit(Level* level, EnemyManager* enemyManager);
 	virtual ~Unit();
 
 	//Update, paint and reset methods
@@ -38,6 +39,7 @@ public:
 	FastPathFinder *getPathFinder();
 	float getScore();
 	void setScore(float score);
+	PathState getState();
 	void setState(PathState state);
 	void deleteRequested(bool deleteRequested);
 	virtual void reachedDestination();
@@ -57,6 +59,7 @@ protected:
 	int m_AnimationPathNodeIndex;
 	FastPathFinder *m_FastPathFinder;
 	Level* m_Level;
+	EnemyManager* m_EnemyManager;
 	PathState m_State;
 	int m_PathIndex;
 

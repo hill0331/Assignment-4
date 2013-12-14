@@ -7,8 +7,8 @@
 //	Modified:		December 12th 2013
 //
 
-#ifndef SETTINGS_MENU_SCREEN_H
-#define SETTINGS_MENU_SCREEN_H
+#ifndef HIGH_SCORES_SCREEN_H
+#define HIGH_SCORES_SCREEN_H
 
 #include "Buttons/ButtonGroup.h"
 #include "../Screen Manager/Screen.h"
@@ -16,19 +16,20 @@
 class OpenGLTexture;
 class UIFont;
 
-class SettingsMenu : public Screen
+class HighScoresScreen : public Screen
 {
 public:
-	SettingsMenu();
-	~SettingsMenu();
+	HighScoresScreen();
+	~HighScoresScreen();
 
-	//SettingsMenu lifecycle methods
+	//HighScoresScreen lifecycle methods
 	void update(double delta);
 	void paint();
 
 	//File loading/saving
-	void loadSettings();
-	void saveSettings();
+	void loadHighScores();
+	void saveHighScores();
+	void addScore(int score);
 
 	//Screen name, must be implemented, it's a pure
 	//virtual method in the Screen class
@@ -51,7 +52,11 @@ private:
 	//Key up and down event methods, inherited from Screen
 	virtual void keyDownEvent(int keyCode);
 	virtual void keyUpEvent(int keyCode);
-	
+
+	void drawHighScores();
+
+	std::vector<int> m_HighScores;
+
 	//Textures
 	OpenGLTexture * m_OverlayTexture;
 	OpenGLTexture ** m_BkgTextureList;
@@ -63,9 +68,7 @@ private:
 
 	//UI
 	OpenGLTexture * m_TitleTex;
-
-	//Settings
-	int m_Difficulty;
+	UIFont * m_Font;
 
 	//Buttons
 	ButtonGroup * m_Buttons;	

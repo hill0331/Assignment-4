@@ -39,7 +39,7 @@
 #include <fstream>
 #include "../Libraries/jsoncpp/json.h"
 #include "../Path/FastPathFinder.h"
-#include "EnemyUnit.h"
+#include "EnemyManager.h"
 
 Level::Level(bool isEditingLevel) :
 m_HorizontalTiles(0),
@@ -54,14 +54,18 @@ m_PaintTileIndexes(false),
 m_PaintBradPathScoring(false),
 m_LevelBkg(NULL),
 m_TargetTile(NULL),
-m_Lives(3)
+m_Lives(3),
+m_PlayerScore(0),
+m_EnemyManager(NULL)
 {
 	//Create the player object
 	if (isEditingLevel == false || true)
 	{
 		//m_Player = new Player(this);
-	}	
-	
+	}
+
+	m_EnemyManager = new EnemyManager(this);
+
 }
 
 Level::~Level()
@@ -91,7 +95,12 @@ Level::~Level()
 		m_Tiles = NULL;
 	}
 
-	m_EnemySpawnPoints.clear();	
+	if (m_EnemyManager != NULL)
+	{
+		delete m_EnemyManager;
+		m_EnemyManager = NULL;
+	}
+
 }
 
 void Level::clear()
@@ -105,10 +114,6 @@ void Level::clear()
 		}
 	}
 }
-Tile * Level::getTargetTile()
-{
-	return m_TargetTile;
-}
 
 void Level::update(double aDelta)
 {
@@ -116,6 +121,7 @@ void Level::update(double aDelta)
 	{
 		gameOver();
 	}
+
 	//Update all the game tiles
 	for (int i = 0; i < (int)getNumberOfTiles(); i++)
 	{
@@ -125,13 +131,6 @@ void Level::update(double aDelta)
 		}
 	}
 
-	if (m_Queue.empty() == false)
-	{
-		Unit *unit = m_Queue.top();
-		m_Queue.pop();
-		unit->setState(START);
-	}
-
 	//Update the Player
 	if (m_Player != NULL)
 	{
@@ -139,30 +138,9 @@ void Level::update(double aDelta)
 
 	}
 
-	//Update spawn Points
-	if (m_EnemySpawnPoints.size() != 0)
+	if (m_EnemyManager != NULL)
 	{
-		for (int i = 0; i < m_EnemySpawnPoints.size(); i++)
-		{			
-			m_EnemySpawnPoints.at(i)->update(aDelta);
-		}
-	}
-
-	for (int i = 0; i < m_Units.size(); i++)
-	{
-		if (m_Units.at(i)->getIsActive() == false)
-		{
-			//m_Units.at(i)->deleteRequested(true);	
-			//m_Units.at(i)->update(aDelta);
-			Unit * unit = m_Units.at(i);
-			delete unit;
-			unit = NULL;
-			m_Units.erase(m_Units.begin() + i);
-		}
-		else
-		{
-			m_Units.at(i)->update(aDelta);
-		}
+		m_EnemyManager->update(aDelta);
 	}
 
 }
@@ -183,23 +161,22 @@ void Level::paint()
 			{
 				//Paint the tile
 				m_Tiles[i]->paint();
-			}			
+			}
 		}
 	}
 
 
 	//Paint the Player
 	if (m_Player != NULL)
-	{		
+	{
 		//Paint the player
 		m_Player->paint();
-	}
-
-	//Paint enemy units
-	for (int i = 0; i < m_Units.size(); i++)
-	{
-		m_Units.at(i)->paint();		
 	}	
+
+	if (m_EnemyManager != NULL)
+	{
+		m_EnemyManager->paint();
+	}
 }
 
 
@@ -223,13 +200,6 @@ void Level::reset()
 			m_Player->setCurrentTile(m_Tiles[m_PlayerStartingTileIndex]);
 		}
 
-		for (int i = 0; i < m_Units.size(); i++)
-		{
-			Unit* unit = (Unit*)(m_Units.at(i));
-			unit->deleteRequested(true);
-		}
-		m_Units.clear();
-		//m_SpawnPoint->setCurrentTile(m_Tiles[0]);
 	}
 }
 
@@ -258,7 +228,7 @@ void Level::mouseLeftClickUpEvent(float aPositionX, float aPositionY)
 
 void Level::keyUpEvent(int keyCode)
 {
-	
+
 }
 
 void Level::load(std::string levelName)
@@ -269,7 +239,7 @@ void Level::load(std::string levelName)
 	{
 		Json::Value root;
 		Json::Reader reader;
-		std::ifstream in;		
+		std::ifstream in;
 
 		std::string bkgLevelName = "backgrounds/";
 		bkgLevelName.append(levelName);
@@ -288,7 +258,7 @@ void Level::load(std::string levelName)
 		in.open(levelName);
 
 		bool success = reader.parse(in, root, false);
-		
+
 
 		if (success == true)
 		{
@@ -338,18 +308,11 @@ void Level::load(std::string levelName)
 
 					if (m_Tiles[tileIndex]->getTileType() == TileTypeEnemySpawn)
 					{
-						static int spawnTime = 2;
-
-						SpawnPoint * enemySpawn = new SpawnPoint(this);
-						enemySpawn->setSpawnRate(spawnTime);
-						enemySpawn->setCurrentTile(m_Tiles[tileIndex]);
-
-						m_EnemySpawnPoints.push_back(enemySpawn);
-						spawnTime += 1;						
+						m_EnemyManager->addSpawnPointAtTile(m_Tiles[tileIndex]);
 					}
 					else if (m_Tiles[tileIndex]->getTileType() == TileTypeTarget)
 					{
-						m_TargetTile = m_Tiles[tileIndex];
+						m_EnemyManager->setTargetTile( m_Tiles[tileIndex]);
 					}
 
 					//Increment the tile index
@@ -373,8 +336,8 @@ void Level::load(std::string levelName)
 			in.close();
 			exit(0);
 		}
-		in.close();			
-	}	
+		in.close();
+	}
 }
 
 
@@ -599,19 +562,6 @@ void Level::setSelectedTileIndex(int aSelectedIndex)
 	}
 }
 
-void Level::queueForPathFinding(Unit * unit)
-{
-	unit->setState(STATIONARY);
-	m_Queue.push(unit);
-}
-
-void Level::addEnemyUnit(Unit *unit)
-{
-	m_Units.push_back(unit);
-	unit->setDestinationTile(m_TargetTile);
-	queueForPathFinding(unit);
-}
-
 int Level::getNumberOfLives()
 {
 	return m_Lives;
@@ -631,4 +581,20 @@ void Level::decrementLives(int livesToSubract)
 void Level::gameOver()
 {
 	ScreenManager::getInstance()->switchScreen(GAME_OVER_SCREEN_NAME);
+}
+
+//Score
+int Level::getPlayerScore()
+{
+	return m_PlayerScore;
+}
+
+void Level::setPlayerScore(int score)
+{
+	m_PlayerScore = score;
+}
+
+void Level::addToPlayerScore(int pointsToAdd)
+{
+	m_PlayerScore += pointsToAdd;
 }

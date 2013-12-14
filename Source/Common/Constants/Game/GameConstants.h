@@ -3,6 +3,10 @@
 
 #include "../../OpenGL/OpenGLColor.h"
 
+#define EASY 0
+#define NORMAL 1
+#define HARD 2
+
 //Game Constants
 extern const char* GAME_SCREEN_NAME;
 

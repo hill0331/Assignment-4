@@ -1,21 +1,29 @@
 //
 //	Student:		Bradley Hill
-//	Creation date:	October 15th 2013
+//	Creation date:	December 12th 2013
 //	Course number:	GAM1514
 //	Professor:		Dan Lingman
-//	Purpose:		Main Menu Screen Code
-//	Modified:		October 30th 2013
+//	Purpose:		High Scores Screen Code
+//	Modified:		December 12th 2013
 //
 
-#include "MainMenu.h"
+#include "HighScoresScreen.h"
 #include "../OpenGL/OpenGL.h"
 #include "../Constants/Constants.h"
 #include "../Utils/Utils.h"
+#include <algorithm>
 #include "../Screen Manager/ScreenManager.h"
+#include "../UI/UIFont.h"
+#include <sstream>
 
-#include "Buttons/MainMenuButtonGroup.h"
+//File IO
+#include <stdlib.h>
+#include <fstream>
+#include "../Libraries/jsoncpp/json.h"
 
-MainMenu::MainMenu()
+#include "Buttons/HighScoresButtonGroup.h"
+
+HighScoresScreen::HighScoresScreen()
 {
 	m_BkgTextureCount = 2;
 
@@ -26,7 +34,11 @@ MainMenu::MainMenu()
 
 	m_OverlayTexture = new OpenGLTexture(GAME_MAP_OVERLAY_TEXTURE);
 
-	m_Buttons = new MainMenuButtonGroup();
+	m_TitleTex = new OpenGLTexture(HIGH_SCORES_SCREEN_TITLE_TEXTURE);
+
+	m_Font = new UIFont("fonts/TechFont");
+
+	m_Buttons = new HighScoresButtonGroup();
 	m_CurrentAlpha = 1;
 	m_TransitionOut = false;
 	m_ScreenToTransition = "";
@@ -36,12 +48,24 @@ MainMenu::MainMenu()
 	m_BkgAlpha = 0;
 }
 
-MainMenu::~MainMenu()
+HighScoresScreen::~HighScoresScreen()
 {
 	if (m_OverlayTexture != NULL)
 	{
 		delete m_OverlayTexture;
 		m_OverlayTexture = NULL;
+	}
+
+	if (m_Font != NULL)
+	{
+		delete m_Font;
+		m_Font = NULL;
+	}
+
+	if (m_TitleTex != NULL)
+	{
+		delete m_TitleTex;
+		m_TitleTex = NULL;
 	}
 
 	for (int i = 0; i < m_BkgTextureCount; i++)
@@ -60,7 +84,7 @@ MainMenu::~MainMenu()
 	}
 }
 
-void MainMenu::update(double delta)
+void HighScoresScreen::update(double delta)
 {
 
 	m_Buttons->update(delta);
@@ -114,7 +138,7 @@ void MainMenu::update(double delta)
 	}
 }
 
-void MainMenu::paint()
+void HighScoresScreen::paint()
 {
 	OpenGLRenderer::getInstance()->drawTexture(m_BkgTextureList[m_CurrentBkgTexture], m_BkgTexturePosition, 0.0f);
 
@@ -125,6 +149,10 @@ void MainMenu::paint()
 	OpenGLRenderer::getInstance()->setForegroundColor(fillColor0);
 	OpenGLRenderer::getInstance()->drawRectangle(0.0f, 0.0f, getWidth(), getHeight(), true);
 
+	OpenGLRenderer::getInstance()->drawTexture(m_TitleTex, (getWidth() - m_TitleTex->getSourceWidth()) / 2, getHeight() *0.15f);
+
+	drawHighScores();
+
 	m_Buttons->paint();
 
 	//Fade Effect
@@ -133,25 +161,122 @@ void MainMenu::paint()
 	OpenGLRenderer::getInstance()->drawRectangle(0.0f, 0.0f, getWidth(), getHeight(), true);
 }
 
-const char* MainMenu::getName()
+//File loading/saving
+void HighScoresScreen::loadHighScores()
 {
-	return MAIN_MENU_SCREEN_NAME;
+	//If the level name isn't NULL load the level from the filesystem,
+	//if it is NULL load an empty level with just ground tiles
+
+	Json::Value root;
+	Json::Reader reader;
+	std::ifstream in;
+
+	in.open("HighScores.json");
+
+	bool success = reader.parse(in, root, false);
+
+	if (success == true)
+	{	
+		const Json::Value highScores = root["highScores"];
+
+		//clear vector
+		m_HighScores.clear();
+
+		//Cycle through all the tiles and create them
+		for (int i = 0; i < highScores.size(); i++)
+		{
+			//Deterime tile type to add
+			int highScore = highScores[i].get("value", NULL).asInt();
+			m_HighScores.push_back(highScore);
+		}
+
+		//Sort vector
+		std::sort(m_HighScores.rbegin(), m_HighScores.rend());
+	}
+
+	in.close();
+}
+
+void HighScoresScreen::saveHighScores()
+{
+	Json::Value root;
+
+	Json::Value highScores;
+	Json::Value score;
+
+	//Sort vector
+	std::sort(m_HighScores.rbegin(), m_HighScores.rend());
+
+	//Copy the high scores data into the buffer
+	for (int i = 0; i < m_HighScores.size(); i++)
+	{
+		score["value"] = m_HighScores.at(i);
+		highScores.append(score);
+	}
+
+	root["highScores"] = highScores;
+
+	std::ofstream out;
+	out.open("HighScores.json");
+	out << root;
+	out.close();
+}
+
+void HighScoresScreen::drawHighScores()
+{
+	for (int i = 0; i < m_HighScores.size(); i++)
+	{
+		std::ostringstream oss;	
+
+		std::string score = "# ";
+
+		oss << (int)i + 1;
+		oss << "                        ";
+		score.append(oss.str());
+		oss.str(std::string());
+
+		oss << (int)m_HighScores.at(i);
+		score.append(oss.str());
+
+		m_Font->setText(score.c_str());
+		m_Font->draw(getWidth() * 0.4, getHeight() * 0.4 + (50 * i));
+
+		//Clear stream
+		oss.str(std::string());
+	}
+}
+
+void HighScoresScreen::addScore(int score)
+{
+	if (m_HighScores.back() < score)
+	{
+		m_HighScores.push_back(score);
+
+		//Sort vector
+		std::sort(m_HighScores.rbegin(), m_HighScores.rend());
+
+		m_HighScores.pop_back();
+
+		saveHighScores();
+	}
+}
+
+const char* HighScoresScreen::getName()
+{
+	return HIGH_SCORES_SCREEN_NAME;
 }
 
 //Screen event method, inherited from the screen class
-void MainMenu::screenWillAppear()
+void HighScoresScreen::screenWillAppear()
 {
 	m_CurrentAlpha = 1;
 	m_TransitionOut = false;
 	m_ScreenToTransition = "";
 
-	if (ScreenManager::getInstance()->getScreenForName(GAME_SCREEN_NAME) != NULL)
-	{
-		ScreenManager::getInstance()->removeScreen(GAME_SCREEN_NAME);
-	}
+	loadHighScores();	
 }
 
-void MainMenu::mouseMovementEvent(float deltaX, float deltaY, float positionX, float positionY)
+void HighScoresScreen::mouseMovementEvent(float deltaX, float deltaY, float positionX, float positionY)
 {
 	if (m_Buttons != NULL)
 	{
@@ -160,7 +285,7 @@ void MainMenu::mouseMovementEvent(float deltaX, float deltaY, float positionX, f
 	//Handle mouse movement events here
 }
 
-void MainMenu::mouseLeftClickDownEvent(float positionX, float positionY)
+void HighScoresScreen::mouseLeftClickDownEvent(float positionX, float positionY)
 {
 	if (m_Buttons != NULL)
 	{
@@ -169,7 +294,7 @@ void MainMenu::mouseLeftClickDownEvent(float positionX, float positionY)
 	//Handle mouse left click down events here
 }
 
-void MainMenu::mouseRightClickDownEvent(float positionX, float positionY)
+void HighScoresScreen::mouseRightClickDownEvent(float positionX, float positionY)
 {
 	//Handle mouse right click down events here
 	if (m_Buttons != NULL)
@@ -178,7 +303,7 @@ void MainMenu::mouseRightClickDownEvent(float positionX, float positionY)
 	}
 }
 
-void MainMenu::mouseLeftClickUpEvent(float positionX, float positionY)
+void HighScoresScreen::mouseLeftClickUpEvent(float positionX, float positionY)
 {
 	//Handle mouse left click up events here
 	if (m_Buttons != NULL)
@@ -187,7 +312,7 @@ void MainMenu::mouseLeftClickUpEvent(float positionX, float positionY)
 	}
 }
 
-void MainMenu::mouseRightClickUpEvent(float positionX, float positionY)
+void HighScoresScreen::mouseRightClickUpEvent(float positionX, float positionY)
 {
 	//Handle mouse right click up events here
 	if (m_Buttons != NULL)
@@ -196,7 +321,7 @@ void MainMenu::mouseRightClickUpEvent(float positionX, float positionY)
 	}
 }
 
-void MainMenu::keyDownEvent(int keyCode)
+void HighScoresScreen::keyDownEvent(int keyCode)
 {
 	if (m_Buttons != NULL)
 	{
@@ -205,7 +330,7 @@ void MainMenu::keyDownEvent(int keyCode)
 	//Handle keyboard down events here
 }
 
-void MainMenu::keyUpEvent(int keyCode)
+void HighScoresScreen::keyUpEvent(int keyCode)
 {
 	//Handle keyboard up events here
 	if (m_Buttons != NULL)
@@ -214,30 +339,16 @@ void MainMenu::keyUpEvent(int keyCode)
 	}
 }
 
-void MainMenu::transitionOut(const char* screenName)
+void HighScoresScreen::transitionOut(const char* screenName)
 {
 	ScreenManager::getInstance()->switchScreen(screenName);
 }
 
-void MainMenu::buttonPressed(int buttonNumber)
+void HighScoresScreen::buttonPressed(int buttonNumber)
 {
 	if (buttonNumber == 0)
 	{
-		m_ScreenToTransition = FILE_MENU_SCREEN_NAME;
+		m_ScreenToTransition = MAIN_MENU_SCREEN_NAME;
 		m_TransitionOut = true;
-	}
-	else if (buttonNumber == 1)
-	{
-		m_ScreenToTransition = HIGH_SCORES_SCREEN_NAME;
-		m_TransitionOut = true;
-	}
-	else if (buttonNumber == 2)
-	{
-		m_ScreenToTransition = SETTINGS_MENU_SCREEN_NAME;
-		m_TransitionOut = true;
-	}
-	else if (buttonNumber == 3) //Quit
-	{
-		exit(0);
-	}
+	}	
 }

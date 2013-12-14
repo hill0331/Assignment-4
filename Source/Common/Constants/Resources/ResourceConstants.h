@@ -38,9 +38,6 @@ extern const char* FAST_FOARWARD_2X_TEXTURE;
 extern const char* FAST_FOARWARD_5X_TEXTURE;
 extern const char* HUD_BORDER_TEXTURE;
 
-//Level Backgrounds
-extern const char* RES_BACKGROUND_LEVEL1;
-
 //Tile Grid
 extern const char * RES_TILE_GRID;
 
@@ -52,6 +49,13 @@ extern const char* SPLASH_SCREEN_LOGO_TEXTURE;
 extern const char* MAIN_MENU_BKG_TEXTURE_0;
 extern const char* MAIN_MENU_BKG_TEXTURE_1;
 
+//High Scores
+extern const char* HIGH_SCORES_SCREEN_TITLE_TEXTURE;
+
+//Settings
+extern const char* SETTINGS_MENU_TITLE_TEXTURE;
+
+//Game over
 extern const char* GAME_OVER_SCREEN_TITLE_TEXTURE;
 
 #endif 

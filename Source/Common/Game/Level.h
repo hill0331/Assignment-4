@@ -13,29 +13,12 @@
 
 #include "../Constants/Constants.h"
 #include "../Path/FastPathFinder.h"
-#include <queue>
 #include <vector>
-#include "SpawnPoint.h"
-#include "Unit.h"
-#include "EnemyUnit.h"
-
-class mycomparison {
-public: 
-  mycomparison() 
-  {}
-  bool operator() (Unit*& lhs, Unit*&rhs) const 
-  { 
-    // assume Unit has a getScore method that tells us 
-    // how important this Unit is.
-    return ((lhs->getScore()) < (rhs->getScore())); 
-  } 
-};
-
-typedef std::priority_queue<Unit *, std::vector<Unit *>,mycomparison> mypq_type;
-
 
 class Tile;
 class Player;
+class EnemyManager;
+class OpenGLTexture;
 
 class Level
 {
@@ -88,15 +71,17 @@ public:
     
     //Coveniance methods to toggle debug paint methods
     void togglePaintTileScoring();
-    void togglePaintTileIndexes();
-	void queueForPathFinding (Unit * unit);   
-	void addEnemyUnit(Unit *unit);
-	Tile * getTargetTile();
+    void togglePaintTileIndexes();		
 
 	//Lives
 	int getNumberOfLives();
 	void setNumberOfLives(int lives);
 	void decrementLives(int livesToSubract);
+
+	//Score
+	int getPlayerScore();
+	void setPlayerScore(int score);
+	void addToPlayerScore(int pointsToAdd);
 
 protected:
 	//Disables the old tiles selection (if ground tile) and
@@ -108,6 +93,8 @@ protected:
 	//Protected Member variables
 	Player* m_Player;
 	Tile** m_Tiles;
+	EnemyManager * m_EnemyManager;
+
 	unsigned int m_HorizontalTiles;
 	unsigned int m_VerticalTiles;
 	unsigned int m_TileSize;
@@ -116,14 +103,12 @@ protected:
     bool m_PaintTileScoring;
 	bool m_PaintBradPathScoring;
     bool m_PaintTileIndexes;
-	mypq_type m_Queue;
-	std::vector<Unit*> m_Units;
-	std::vector<SpawnPoint*> m_EnemySpawnPoints;
 
 	OpenGLTexture * m_LevelBkg;
 	Tile * m_TargetTile;
 
 	int m_Lives;
+	int m_PlayerScore;
 
 };
 

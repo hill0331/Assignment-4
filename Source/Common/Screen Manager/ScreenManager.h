@@ -20,6 +20,7 @@ public:
 	void paint();
     
 	void addScreen(Screen* screen);
+	void removeScreen(const char* name);
     
 	void switchScreen(Screen* screen);
 	void switchScreen(const char* name);
