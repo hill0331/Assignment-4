@@ -62,6 +62,7 @@ private:
 	UIFont * m_Font;
 
 	void gameOver();
+	void victory();
 	void drawHUD();
 
 	float m_ElapsedGameTime;

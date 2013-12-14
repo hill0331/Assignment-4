@@ -35,6 +35,7 @@ public:
 
 	//Setter methods for the current and destination tiles
 	void reachedDestination();
+	void destroyed();
 
 	int getUnitHealth();
 	void setUnitHealth(int health);

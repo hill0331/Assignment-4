@@ -82,6 +82,9 @@ public:
 	int getPlayerScore();
 	void setPlayerScore(int score);
 	void addToPlayerScore(int pointsToAdd);
+	int getEnemiesDestroyed();
+	void setEnemiesDestroyed(int enemies);
+	void addToEnemiesDestroyed(int enemiesToAdd);
 
 protected:
 	//Disables the old tiles selection (if ground tile) and
@@ -107,6 +110,7 @@ protected:
 
 	int m_Lives;
 	int m_PlayerScore;
+	int m_EnemiesDestroyed;
 
 };
 

@@ -56,7 +56,8 @@ m_LevelBkg(NULL),
 m_TargetTile(NULL),
 m_Lives(10),
 m_PlayerScore(0),
-m_EnemyManager(NULL)
+m_EnemyManager(NULL),
+m_EnemiesDestroyed(51)
 {
 	//Create the player object
 	if (isEditingLevel == false || true)
@@ -587,4 +588,18 @@ void Level::setPlayerScore(int score)
 void Level::addToPlayerScore(int pointsToAdd)
 {
 	m_PlayerScore += pointsToAdd;
+}
+
+int Level::getEnemiesDestroyed()
+{
+	return m_EnemiesDestroyed;
+}
+
+void Level::setEnemiesDestroyed(int enemies)
+{
+	m_EnemiesDestroyed = enemies;
+}
+void Level::addToEnemiesDestroyed(int enemiesToAdd)
+{
+	m_EnemiesDestroyed += enemiesToAdd;
 }

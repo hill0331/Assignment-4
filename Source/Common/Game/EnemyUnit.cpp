@@ -4,6 +4,7 @@
 //
 //  Created by Bradley Flood on 2013-03-07.
 //  Copyright (c) 2013 Algonquin College. All rights reserved.
+//	Modified by Bradley Hill - December 13 2013
 //
 
 #include "EnemyUnit.h"
@@ -85,6 +86,13 @@ void EnemyUnit::reachedDestination()
 
 }
 
+void EnemyUnit::destroyed()
+{
+	m_Level->addToEnemiesDestroyed(1);
+	m_Level->addToPlayerScore(5);
+	setIsActive(false);
+}
+
 int EnemyUnit::getUnitHealth()
 {
 	return m_UnitHealth;
@@ -93,9 +101,19 @@ int EnemyUnit::getUnitHealth()
 void EnemyUnit::setUnitHealth(int health)
 {
 	m_UnitHealth = health;
+
+	if (m_UnitHealth <= 0)
+	{
+		destroyed();
+	}
 }
 
 void EnemyUnit::decrementUnitHealth(int healthToSubtract)
 {
 	m_UnitHealth -= healthToSubtract;
+
+	if (m_UnitHealth <= 0)
+	{
+		destroyed();
+	}
 }

@@ -91,6 +91,11 @@ void Game::update(double delta)
 		gameOver();
 	}
 
+	if (m_Level->getEnemiesDestroyed() > 50)
+	{
+		victory();
+	}
+
 	m_ElapsedGameTime += delta * m_FastForwardState;
 
 	if (m_Level != NULL)
@@ -298,4 +303,10 @@ void Game::gameOver()
 {
 	ScreenManager::getInstance()->switchScreen(GAME_OVER_SCREEN_NAME);
 }
+
+void Game::victory()
+{
+	ScreenManager::getInstance()->switchScreen(VICTORY_SCREEN_NAME);
+}
+
 
