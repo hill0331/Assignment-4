@@ -66,7 +66,7 @@ ScreenManager::~ScreenManager()
 void ScreenManager::loadScreens()
 {
 	//Create the Game screens
-	//addScreen(new SplashScreen());
+	addScreen(new SplashScreen());
     addScreen(new MainMenu());	
 	addScreen(new FileMenu());
 	addScreen(new HighScoresScreen());
