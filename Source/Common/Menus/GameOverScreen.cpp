@@ -13,6 +13,9 @@
 #include "../Utils/Utils.h"
 #include "../Screen Manager/ScreenManager.h"
 
+#include "../Game/Game.h"
+#include "HighScoresScreen.h"
+
 #include "Buttons/GameOverScreenButtonGroup.h"
 
 GameOverScreen::GameOverScreen()
@@ -150,7 +153,12 @@ const char* GameOverScreen::getName()
 
 //Screen event method, inherited from the screen class
 void GameOverScreen::screenWillAppear()
-{
+{	
+	Game * gameScreen = (Game*)ScreenManager::getInstance()->getScreenForName(GAME_SCREEN_NAME);
+	HighScoresScreen * highScoresScreen = (HighScoresScreen*)ScreenManager::getInstance()->getScreenForName(HIGH_SCORES_SCREEN_NAME);
+
+	highScoresScreen->addScore(gameScreen->getPlayerScore());
+
 	m_CurrentAlpha = 1;
 	m_TransitionOut = false;
 	m_ScreenToTransition = "";

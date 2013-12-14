@@ -248,6 +248,11 @@ void HighScoresScreen::drawHighScores()
 
 void HighScoresScreen::addScore(int score)
 {
+	if (m_HighScores.size() == 0)
+	{
+		loadHighScores();
+	}
+
 	if (m_HighScores.back() < score)
 	{
 		m_HighScores.push_back(score);

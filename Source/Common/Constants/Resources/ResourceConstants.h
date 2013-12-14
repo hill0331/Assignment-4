@@ -38,6 +38,8 @@ extern const char* FAST_FOARWARD_2X_TEXTURE;
 extern const char* FAST_FOARWARD_5X_TEXTURE;
 extern const char* HUD_BORDER_TEXTURE;
 
+extern const char* ENEMY_TANK_TEXTURE;
+
 //Tile Grid
 extern const char * RES_TILE_GRID;
 

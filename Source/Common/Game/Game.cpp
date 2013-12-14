@@ -86,6 +86,11 @@ void Game::screenWillAppear()
 
 void Game::update(double delta)
 {
+	if (m_Level->getNumberOfLives() <= 0)
+	{
+		gameOver();
+	}
+
 	m_ElapsedGameTime += delta * m_FastForwardState;
 
 	if (m_Level != NULL)
@@ -118,8 +123,18 @@ void Game::paint()
 		OpenGLRenderer::getInstance()->drawTexture(m_FastForward5X, 5.0f, 5.0f);
 	}
 
+	drawHUD();
+
+	if (m_TowersMenu != NULL)
+	{
+		m_TowersMenu->paint();
+	}
+}
+
+void Game::drawHUD()
+{
 	//Text border
-	OpenGLRenderer::getInstance()->drawTexture(m_HUDBorderTex, (getWidth() - m_HUDBorderTex->getTextureWidth()) /2, 0.0f);
+	OpenGLRenderer::getInstance()->drawTexture(m_HUDBorderTex, (getWidth() - m_HUDBorderTex->getTextureWidth()) / 2, 0.0f);
 
 	//Text based UI
 	if (m_Font != NULL)
@@ -137,10 +152,10 @@ void Game::paint()
 		//Lives	
 		oss.str(std::string());
 		oss << m_Level->getNumberOfLives();
-		 
+
 		std::string lives = "LIVES   ";
 		lives.append(oss.str());
-		
+
 		m_Font->setText(lives.c_str());
 		m_Font->draw(getWidth() * 0.29, 5.0f);
 
@@ -153,11 +168,6 @@ void Game::paint()
 
 		m_Font->setText(score.c_str());
 		m_Font->draw(getWidth() * 0.58, 5.0f);
-	}
-
-	if (m_TowersMenu != NULL)
-	{
-		m_TowersMenu->paint();
 	}
 }
 
@@ -279,4 +289,13 @@ void Game::sideMenuToggleAction(UISideMenu* sideMenu, UIToggle* toggle, int togg
 
 }
 
+int Game::getPlayerScore()
+{
+	return m_Level->getPlayerScore();
+}
+
+void Game::gameOver()
+{
+	ScreenManager::getInstance()->switchScreen(GAME_OVER_SCREEN_NAME);
+}
 

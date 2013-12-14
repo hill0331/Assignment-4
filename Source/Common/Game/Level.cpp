@@ -54,7 +54,7 @@ m_PaintTileIndexes(false),
 m_PaintBradPathScoring(false),
 m_LevelBkg(NULL),
 m_TargetTile(NULL),
-m_Lives(3),
+m_Lives(10),
 m_PlayerScore(0),
 m_EnemyManager(NULL)
 {
@@ -117,11 +117,6 @@ void Level::clear()
 
 void Level::update(double aDelta)
 {
-	if (m_Lives <= 0)
-	{
-		gameOver();
-	}
-
 	//Update all the game tiles
 	for (int i = 0; i < (int)getNumberOfTiles(); i++)
 	{
@@ -576,11 +571,6 @@ void Level::setNumberOfLives(int lives)
 void Level::decrementLives(int livesToSubract)
 {
 	m_Lives -= livesToSubract;
-}
-
-void Level::gameOver()
-{
-	ScreenManager::getInstance()->switchScreen(GAME_OVER_SCREEN_NAME);
 }
 
 //Score

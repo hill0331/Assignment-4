@@ -38,6 +38,8 @@ const char* FAST_FOARWARD_2X_TEXTURE = "UI/Game/FastForward2X";
 const char* FAST_FOARWARD_5X_TEXTURE = "UI/Game/FastForward5X";
 const char* HUD_BORDER_TEXTURE = "UI/Game/HUDBorder";
 
+const char* ENEMY_TANK_TEXTURE = "units/EnemyTank";
+
 //Tile Grid
 const char * RES_TILE_GRID = "tiles/GridOverlay";
 

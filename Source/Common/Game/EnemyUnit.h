@@ -12,10 +12,12 @@
 #include "GameObject.h"
 #include <vector>
 #include "Unit.h"
+
 class Level;
 class Tile;
 class FastPathFinder;
 class EnemyManager;
+class OpenGLTexture;
 
 class EnemyUnit : public Unit
 {
@@ -40,6 +42,12 @@ public:
 
 protected:
 	int m_UnitHealth;
+
+	float m_Rotation;
+	float m_PrevX;
+	float m_PrevY;
+
+	OpenGLTexture * m_Texture;
 
 };
 

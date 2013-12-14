@@ -23,11 +23,20 @@ EnemyUnit::EnemyUnit(Level* aLevel, EnemyManager * enemyManager) :Unit(aLevel, e
 {
 	m_UnitHealth = 10;
 	setScore(10);	
+	m_Texture = new OpenGLTexture(ENEMY_TANK_TEXTURE);
+
+	m_Rotation = 0.0f;
+	m_PrevX = getX();
+	m_PrevY = getY();
 }
 
 EnemyUnit::~EnemyUnit()
 {
-
+	if (m_Texture != NULL)
+	{
+		delete m_Texture;
+		m_Texture = NULL;
+	}
 }
 
 const char* EnemyUnit::getType()
@@ -36,11 +45,28 @@ const char* EnemyUnit::getType()
 }
 void EnemyUnit::paint()
 {
-	OpenGLRenderer::getInstance()->setForegroundColor(OpenGLColorRed());
-	OpenGLRenderer::getInstance()->drawCircle(getX() + (getWidth() / 2), getY() + (getHeight() / 2), getWidth() / 2,true,12);
-	OpenGLRenderer::getInstance()->setForegroundColor(PLAYER_OUTLINE_COLOR);
-	OpenGLRenderer::getInstance()->drawCircle(getX() + (getWidth() / 2), getY() + (getHeight() / 2), getWidth() / 2, false,12);
-	
+	//Orient tank
+	if (m_PrevX > getX())
+	{
+		m_Rotation = 270.0f;
+	}
+	else if (m_PrevX < getX())
+	{
+		m_Rotation = 90.0f;
+	}
+	else if (m_PrevY > getY())
+	{
+		m_Rotation = 0.0f;
+	}
+	else if (m_PrevY < getY())
+	{
+		m_Rotation = 180.0f;
+	}
+
+	OpenGLRenderer::getInstance()->drawTexture(m_Texture, getX(), getY(), m_Rotation);	
+
+	m_PrevX = getX();
+	m_PrevY = getY();
 }
 
 void EnemyUnit::reachedDestination()

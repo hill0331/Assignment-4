@@ -86,9 +86,7 @@ public:
 protected:
 	//Disables the old tiles selection (if ground tile) and
 	//enables the newly selected tiles selection (if ground tile)
-	void setSelectedTileIndex(int selectedIndex);
-
-	void gameOver();
+	void setSelectedTileIndex(int selectedIndex);	
     
 	//Protected Member variables
 	Player* m_Player;

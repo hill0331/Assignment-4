@@ -31,6 +31,8 @@ public:
 	void setLevel(Level* level);
 	void setSelectedTile(int tileIndex);
 
+	int getPlayerScore();
+
 private:
 	//Mouse Events
 	void mouseMovementEvent(float deltaX, float deltaY, float positionX, float positionY);
@@ -58,6 +60,9 @@ private:
 	OpenGLTexture * m_FastForward5X;
 	OpenGLTexture * m_HUDBorderTex;
 	UIFont * m_Font;
+
+	void gameOver();
+	void drawHUD();
 
 	float m_ElapsedGameTime;
 };

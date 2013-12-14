@@ -26,7 +26,7 @@ GameOverScreenButtonGroup::GameOverScreenButtonGroup()
 		"/UI/Menus/MainMenu/buttons/SinglePlayer");
 
 	Button *highScoresButton = new Button(buttonX + buttonPadding, buttonY, 350.0f, 100.0f, ENABLED_BUTTON,
-		"/UI/Menus/MainMenu/buttons/MultiPlayer");	
+		"/UI/Menus/MainMenu/buttons/HighScores");	
 
 	Button *exitButton = new Button(buttonX*2 + buttonPadding, buttonY, 350.0f, 100.0f, ENABLED_BUTTON,
 		"UI/Menus/MainMenu/buttons/Exit");
